@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { client } from "../appwrite/appwriteConfig";
-import { databases } from "../appwrite/appwriteConfig";
+import React, { useState, useEffect } from "react";
+import { account } from "../appwrite/appwriteConfig";
 import { useNavigate } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
@@ -8,34 +7,18 @@ import { v4 as uuidv4 } from "uuid";
 const CreateRoom = () => {
   const [room, setRoom] = useState({
     roomName: "",
-    firstName: "",
-    lastName: "",
-    password: "",
+    roomId: "",
   });
   const navigate = useNavigate();
-  const makeRoom = async (e) => {
-    e.preventDefault();
-    console.log(room);
-    const promise = databases.createDocument(
-      "6465138ecda20c9f16fc",
-      "64665b3ccc38f6b475fd",
-      uuidv4(),
-      room
-    );
-    promise.then(
-      function (response) {
-        navigate("/board");
+
+  function createRoomHandler() {
+    const roomId = uuidv4();
+    navigate(`/room/${roomId}`, {
+      state: {
+        roomName: room.roomName,
       },
-      function (err) {
-        console.log(err);
-      }
-    );
-
-    await client.subscribe("room", (response) => {
-      console.log(response);
     });
-  };
-
+  }
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-slate-400  flex-col">
       <h1 className="text-black text-3xl">Create Room</h1>
@@ -126,7 +109,7 @@ const CreateRoom = () => {
         <button
           type="submit"
           class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          onClick={makeRoom}
+          onClick={createRoomHandler}
         >
           Create Room
         </button>

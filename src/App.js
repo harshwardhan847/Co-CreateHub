@@ -1,10 +1,10 @@
-import { BrowserRouter, Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Signup from "./pages/signup.jsx";
 import Login from "./pages/login.jsx";
 import Profile from "./pages/profile.jsx";
 import CreateRoom from "./pages/CreateRoom.jsx";
-import Board from "./pages/Board.jsx";
+import Room from "./pages/Room.jsx";
 function App() {
   return (
     <div className="App w-screen h-screen">
@@ -14,7 +14,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/createRoom" element={<CreateRoom />} />
-          <Route path="/board" element={<Board />} />
+          <Route path="/room/:roomId" element={<Room />} />
         </Routes>
       </BrowserRouter>
     </div>

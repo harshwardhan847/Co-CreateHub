@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { account } from "../appwrite/appwriteConfig";
+import { account,client } from "../appwrite/appwriteConfig";
 import { useNavigate, Link } from "react-router-dom";
 import { databases } from "../appwrite/appwriteConfig";
 import EditProfile from "../components/EditProfile";
@@ -15,7 +15,7 @@ const Profile = () => {
   useEffect(() => {
     console.log(userDetails);
     getProfileDetails(userDetails.$id);
-  }, [userDetails?.$id]);
+  }, [userDetails]);
   async function getProfileDetails(id) {
     if (userDetails?.$id) {
       const promise = databases.getDocument(
