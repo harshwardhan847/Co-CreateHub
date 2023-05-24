@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Editor from "../components/Editor";
+import Editor from "../components/Editor"; 
 import { useLocation, useParams } from "react-router-dom";
 import Canvas from "./Canvas";
 
