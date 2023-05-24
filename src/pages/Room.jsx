@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Editor from "../components/Editor";
-import RoomNav from "../components/RoomNav";
 import { useLocation, useParams } from "react-router-dom";
 import Canvas from "./Canvas";
 
@@ -55,7 +54,6 @@ const Room = () => {
         </ul>
       </div>
       <main>
-        {/* <RoomNav /> */}
         {editor ? <Editor /> : <Canvas settings={canvasSettings} setSettings={setCanvasSettings} />}
       </main>
     </div>
