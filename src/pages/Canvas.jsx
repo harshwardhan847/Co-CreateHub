@@ -1,129 +1,207 @@
 import React, { useEffect, useRef, useState } from "react";
-
-import { useSearchParams } from "react-router-dom";
+import {
+  AiOutlinePicCenter,
+  AiOutlineMore,
+  AiOutlineClear,
+  AiOutlineDownload,
+} from "react-icons/ai";
+import { TfiPencil, TfiEraser } from "react-icons/tfi";
+import { MdUndo } from "react-icons/md";
+// import { useSearchParams } from "react-router-dom";
 import CanvasDraw from "react-canvas-draw";
-import { client, account, databases } from "../appwrite/appwriteConfig";
-const Canvas = () => {
-  const [params] = useSearchParams();
+import PencilDropdown from "../components/PencilDropdown";
+import MoreDropdown from "../components/MoreDropdown";
+// import { client, account, databases } from "../appwrite/appwriteConfig";
+const Canvas = ({ settings, setSettings }) => {
   const canvasDraw = useRef();
-  const [currentData, setCurrentData] = useState({
-    roomName: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    canvasData: "",
-  });
-  const documentId = params?.get("room");
-  useEffect(() => {
-    const unsubscribe = client.subscribe(
-      `databases.6465138ecda20c9f16fc.collections.64665b3ccc38f6b475fd.documents.${documentId}`,
-
-      (response) => {
-        console.log(response);
-        const data = response?.payload;
-        setCurrentData({
-          roomName: data?.roomName,
-          firstName: data?.firstName,
-          lastName: data?.lastName,
-          password: data?.password,
-          canvasData: data?.canvasData,
-        });
-        canvasDraw?.current?.loadSaveData(data?.canvasData, true);
-      }
-    );
-
-    return () => {
-      unsubscribe();
-    };
-  });
+  const [more, setMore] = useState(false);
+  const [pencil, setpencil] = useState(false);
+  const [eraser, seteraser] = useState(false);
+  const [showCanvasBackgroundDropdown, setshowCanvasBackgroundDropdown] =
+    useState(false);
+  // useEffect(() => {
+  //   const canvas = document.getElementsByTagName("canvas");
+  //   let context = canvas[0].getContext("2d");
+  //   console.log(context);
+  //   context.fillRect(200, 50, 200, 200);
+  // });
 
   useEffect(() => {
-    getRoom(documentId);
-  }, [documentId]);
-
-  async function getRoom(id) {
-    const promise = databases.getDocument(
-      "6465138ecda20c9f16fc",
-      "64665b3ccc38f6b475fd",
-      id
-    );
-    promise.then(
-      function (response) {
-        console.log(response);
-        setCurrentData({
-          roomName: response?.roomName,
-          firstName: response?.firstName,
-          lastName: response?.lastName,
-          password: response?.password,
-          canvasData: response?.canvasData,
-        });
-      },
-      function (err) {
-        console.log(err);
-      }
-    );
-  }
-
-  const updateRoom = async () => {
-    const promise = databases.updateDocument(
-      "6465138ecda20c9f16fc",
-      "64665b3ccc38f6b475fd",
-      documentId,
-      {
-        roomName: currentData?.roomName,
-        firstName: currentData?.firstName,
-        lastName: currentData?.lastName,
-        password: currentData?.password,
-        canvasData: canvasDraw?.current?.getSaveData(),
-      }
-    );
-    promise.then(
-      function (response) {
-        console.log(response);
-      },
-      function (err) {
-        console.log(err);
-      }
-    );
-  };
-  function handleCanvasChange() {
-    // e.preventDefault();
-    console.log(canvasDraw?.current?.getSaveData());
-    setCurrentData({
-      ...currentData,
-      canvasData: canvasDraw?.current?.getSaveData(),
+    setSettings(JSON.parse(localStorage.getItem("canvasSettings")));
+  }, [setSettings]);
+  function handleEraserClick() {
+    if (eraser) {
+      seteraser(false);
+    } else {
+      setpencil(false);
+      setMore(false);
+      seteraser(true);
+      setshowCanvasBackgroundDropdown(false);
+    }
+    setSettings({
+      ...settings,
+      brushColor: settings.canvasColor,
     });
-
-    updateRoom();
   }
+  async function downloadImage(imageSrc, nameOfDownload = "my-image.jpeg") {
+    const response = await fetch(imageSrc);
+
+    const blobImage = await response.blob();
+
+    const href = URL.createObjectURL(blobImage);
+
+    const anchorElement = document.createElement("a");
+    anchorElement.href = href;
+    anchorElement.download = nameOfDownload;
+
+    document.body.appendChild(anchorElement);
+    anchorElement.click();
+
+    document.body.removeChild(anchorElement);
+    window.URL.revokeObjectURL(href);
+  }
+  function handlePencilClick(e) {
+    if (pencil) {
+      setpencil(false);
+      return;
+    }
+    setpencil(true);
+    setMore(false);
+    seteraser(false);
+    setshowCanvasBackgroundDropdown(false);
+  }
+  function handleBackgroundClick(e) {
+    if (showCanvasBackgroundDropdown) {
+      setshowCanvasBackgroundDropdown(false);
+    } else {
+      setshowCanvasBackgroundDropdown(true);
+      setMore(false);
+      seteraser(false);
+      setpencil(false);
+    }
+  }
+  function handleDownloadClick() {
+    const data = canvasDraw?.current
+      ?.getDataURL("img/jpeg", "", settings?.canvasColor)
+      .replace("image/jpeg", "image/octet-stream");
+    let image = new Image();
+    image.src = data;
+    downloadImage(image.src);
+  }
+  function handleMoreClick() {
+    if (more) {
+      setMore(false);
+    } else {
+      setMore(true);
+      seteraser(false);
+      setpencil(false);
+      setshowCanvasBackgroundDropdown(false);
+    }
+  }
+  function onLeave(){
+    seteraser(false);
+    setpencil(false);
+    setMore(false);
+    setshowCanvasBackgroundDropdown(false);
+  }
+
   return (
-    <div className="w-full h-full bg-slate-600">
-      <button onClick={() => canvasDraw?.current?.eraseAll()}>Erase</button>
+    <div className="w-full h-full relative bg-slate-600">
+      <ul onMouseLeave={onLeave} className="absolute z-10 bg-white left-[50%] flex items-center gap-6 text-lg font-semibold p-4 rounded-3xl top-3 shadow-xl border translate-x-[-50%]">
+        <li>
+          <TfiPencil
+            className="inline font-black text-xl cursor-pointer"
+            onClick={handlePencilClick}
+          />
+          <PencilDropdown
+            show={pencil}
+            setSettings={setSettings}
+            settings={settings}
+          />
+        </li>
+        <li>
+          <TfiEraser
+            className="inline font-black text-xl cursor-pointer"
+            onClick={handleEraserClick}
+          />
+          <PencilDropdown
+            show={eraser}
+            setSettings={setSettings}
+            settings={settings}
+            eraser={true}
+          />
+        </li>
+        <li>
+          <AiOutlinePicCenter
+            className="inline font-black text-xl cursor-pointer"
+            onClick={handleBackgroundClick}
+          />
+          <PencilDropdown
+            show={showCanvasBackgroundDropdown}
+            setSettings={setSettings}
+            settings={settings}
+            canvasBackground={true}
+          />
+        </li>
+        <li>
+          <AiOutlineClear
+            className="inline font-black text-xl cursor-pointer"
+            onClick={() => canvasDraw?.current?.eraseAll()}
+          />
+        </li>
+        <li>
+          <AiOutlineDownload
+            className="inline font-black text-xl cursor-pointer"
+            onClick={handleDownloadClick}
+          />
+        </li>
+        <li>
+          <MdUndo
+            className="inline font-black text-xl cursor-pointer"
+            onClick={() => canvasDraw?.current?.undo()}
+          />
+        </li>
+        <li>
+          <AiOutlineMore
+            className="inline font-black text-xl cursor-pointer"
+            onClick={handleMoreClick}
+          />
+
+          <MoreDropdown
+            more={more}
+            settings={settings}
+            setSettings={setSettings}
+          />
+        </li>
+      </ul>
+
       <CanvasDraw
         ref={canvasDraw}
-        onChange={(e) => handleCanvasChange()}
+        // onChange={}
         loadTimeOffset={0}
-        lazyRadius={30}
-        brushRadius={12}
-        brushColor={"#444"}
-        catenaryColor={"#0a0302"}
-        gridColor={"rgba(150,150,150,0.17)"}
-        hideGrid={false}
-        canvasWidth={800}
-        canvasHeight={800}
+        lazyRadius={Number(settings.lazyRadius)}
+        brushRadius={Number(settings.brushSize)}
+        brushColor={settings.brushColor}
+        // catenaryColor={"#0a0302"}
+        gridColor={settings.gridColor}
+        hideGrid={settings.showGrids}
+        canvasWidth={window.innerWidth - 230}
+        canvasHeight={window.innerHeight}
         disabled={false}
         imgSrc={""}
-        saveData={`${currentData?.canvasData}`}
-        immediateLoading={false}
-        hideInterface={false}
+        // saveData={`${canvasDraw?.current}`}
+        immediateLoading={true}
+        hideInterface={settings.hideInterface}
         gridSizeX={25}
         gridSizeY={25}
         gridLineWidth={0.5}
-        hideGridX={false}
-        hideGridY={false}
-        enablePanAndZoom={false}
-        mouseZoomFactor={0.01}
+        clampLinesToDocument={false}
+        // hideGridX={}
+        // hideGridY={settings.showGrids}
+        enablePanAndZoom={true}
+        mouseZoomFactor={0.001}
         zoomExtents={{ min: 0.33, max: 3 }}
+        backgroundColor={settings.canvasColor}
       />
     </div>
   );

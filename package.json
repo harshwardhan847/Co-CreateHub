@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@codemirror/commands": "^6.2.4",
     "@codemirror/lang-css": "^6.2.0",
     "@codemirror/lang-html": "^6.4.3",
     "@codemirror/lang-javascript": "^6.1.8",
@@ -15,6 +16,7 @@
     "react": "^18.2.0",
     "react-canvas-draw": "^1.2.1",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
     "uuid": "^9.0.0",

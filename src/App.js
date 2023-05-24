@@ -5,6 +5,7 @@ import Login from "./pages/login.jsx";
 import Profile from "./pages/profile.jsx";
 import CreateRoom from "./pages/CreateRoom.jsx";
 import Room from "./pages/Room.jsx";
+import Canvas from "./pages/Canvas.jsx";
 function App() {
   return (
     <div className="App w-screen h-screen">
@@ -15,6 +16,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/createRoom" element={<CreateRoom />} />
           <Route path="/room/:roomId" element={<Room />} />
+          <Route path="/canvas/:roomId" element={<Canvas />} />
         </Routes>
       </BrowserRouter>
     </div>
