@@ -2,8 +2,8 @@ import React from "react";
 
 const MoreDropdown = ({ more, settings, setSettings }) => {
   function gridHandler() {
-    console.log(settings.showGrids);
-    if (settings.showGrids) {
+    console.log(settings?.showGrids);
+    if (settings?.showGrids) {
       setSettings({
         ...settings,
         showGrids: false,
@@ -16,7 +16,7 @@ const MoreDropdown = ({ more, settings, setSettings }) => {
     });
   }
   function lazyRadiusClickHandler() {
-    if (settings.lazyRadius > 0) {
+    if (settings?.lazyRadius > 0) {
       setSettings({ ...settings, lazyRadius: 0 });
       return;
     }
@@ -38,7 +38,7 @@ const MoreDropdown = ({ more, settings, setSettings }) => {
             <label class="relative inline-flex items-center w-full cursor-pointer">
               <input
                 type="checkbox"
-                checked={!settings.showGrids}
+                checked={!settings?.showGrids}
                 class="sr-only peer"
                 onChange={gridHandler}
               />
@@ -54,10 +54,12 @@ const MoreDropdown = ({ more, settings, setSettings }) => {
             <label class="relative inline-flex items-center w-full cursor-pointer">
               <input
                 type="checkbox"
-                checked={!settings.hideInterface}
+                checked={!settings?.hideInterface}
                 class="sr-only peer"
-                onChange={()=>{
-                    settings.hideInterface?setSettings({...settings,hideInterface:false}):setSettings({...settings,hideInterface:true})
+                onChange={() => {
+                  settings?.hideInterface
+                    ? setSettings({ ...settings, hideInterface: false })
+                    : setSettings({ ...settings, hideInterface: true });
                 }}
               />
               <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
@@ -72,7 +74,7 @@ const MoreDropdown = ({ more, settings, setSettings }) => {
             <label class="relative inline-flex items-center w-full cursor-pointer">
               <input
                 type="checkbox"
-                checked={settings.lazyRadius > 0 ? true : false}
+                checked={settings?.lazyRadius > 0 ? true : false}
                 class="sr-only peer"
                 onChange={lazyRadiusClickHandler}
               />

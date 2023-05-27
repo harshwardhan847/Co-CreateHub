@@ -10,13 +10,13 @@ const Signup = () => {
     email: "",
     password: "",
   });
-
+const id = uuidv4();
   //signup
   const signupUser = async (e) => {
     e.preventDefault();
     console.log(user);
     const promise = account.create(
-      uuidv4(),
+      id,
       user.email,
       user.password,
       user.name
@@ -25,7 +25,12 @@ const Signup = () => {
     promise.then(
       function (response) {
         console.log(response);
-        navigate("/profile"); //success
+        navigate("/profile", {
+          state: {
+            userId: response?.$id,
+            name: response?.name
+          },
+        }); //success
       },
       function (err) {
         console.log(err); //failure

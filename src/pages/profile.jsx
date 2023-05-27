@@ -1,28 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { account,client } from "../appwrite/appwriteConfig";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { databases } from "../appwrite/appwriteConfig";
 import EditProfile from "../components/EditProfile";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [userDetails, setUserDetails] = useState("");
+  const location = useLocation();
   const [showEdit, setShowEdit] = useState(false);
   const [profile, setProfile] = useState();
+ 
   useEffect(() => {
-    getUserDetails();
-  }, []);
-  useEffect(() => {
-    console.log(userDetails);
-    getProfileDetails(userDetails.$id);
-  }, [userDetails]);
+    getProfileDetails(location?.state?.userId);
+  }, [location?.state?.userId]);
+
+  console.log(location);
   async function getProfileDetails(id) {
-    if (userDetails?.$id) {
       const promise = databases.getDocument(
         "6465138ecda20c9f16fc",
         "646513d8bddffd5663f7",
-        id
-      );
+        id)
       try {
         const response = await promise;
         setProfile(response);
@@ -31,21 +28,9 @@ const Profile = () => {
       } catch (err) {
         console.log(err);
       }
+      return;
     }
-    return;
-  }
-  async function getUserDetails() {
-    const getData = account.get();
-    getData.then(
-      function (response) {
-        setUserDetails(response);
-        console.log(response);
-      },
-      function (err) {
-        console.log(err);
-      }
-    );
-  }
+  
 
   const handleLogout = async () => {
     try {
@@ -56,13 +41,12 @@ const Profile = () => {
     }
   };
 
-  return (
-    userDetails && (
+  return  (
       <main className="profile-page w-full h-full">
         <EditProfile
           show={showEdit}
           setShow={setShowEdit}
-          userDetails={userDetails}
+          id={location?.state?.userId}
           getProfile={getProfileDetails}
         />
         <section className="relative block h-500-px h-[40%]">
@@ -163,7 +147,7 @@ const Profile = () => {
                 </div>
                 <div className="text-center mt-12">
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                    {userDetails?.name}
+                    {location?.state?.name}
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                     <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
@@ -223,8 +207,8 @@ const Profile = () => {
           </footer>
         </section>
       </main>
-    )
-  );
-};
+    
+  )}
+
 
 export default Profile;

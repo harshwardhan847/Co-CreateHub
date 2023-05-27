@@ -11,10 +11,21 @@ const Login = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
-    try {
-      await account.createEmailSession(user.email, user.password);
-      navigate("/profile");
-    } catch (err) {}
+    const promise = account.createEmailSession(user.email, user.password);
+    promise.then(
+      function (response) {
+        console.log(response);
+        navigate("/profile", {
+          state: {
+            userId: response?.$id,
+            name: response?.name
+          },
+        });
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
   };
   return (
     <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">

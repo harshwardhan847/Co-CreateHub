@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Editor from "../components/Editor"; 
 import { useLocation, useParams } from "react-router-dom";
 import Canvas from "./Canvas";
@@ -15,8 +15,11 @@ const Room = () => {
     lazyRadius:0,
     hideInterface:false
   });
+  useEffect(()=>{
+    localStorage.setItem("canvasSettings",JSON.stringify(canvasSettings));
+  },[])
   return (
-    <div className="w-screen h-screen grid grid-cols-[230px,1fr]">
+    <div className="w-screen h-screen grid grid-cols-[230px,1fr] ">
       <div className="aside bg-slate-800 w-full h-full text-white p-2">
         <h1>{location.state?.roomName}Real Time</h1>
         <ul class="w-full text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { databases } from "../appwrite/appwriteConfig";
-const EditProfile = ({ show, setShow, userDetails, getProfile }) => {
+const EditProfile = ({ show, setShow, id, getProfile }) => {
   const [user, setUser] = useState({
     address: "",
     role: "",
@@ -11,45 +11,45 @@ const EditProfile = ({ show, setShow, userDetails, getProfile }) => {
   const [existProfile, setExistProfile] = useState("");
 
   useEffect(() => {
+    const getUserProfile = async () => {
+      const promise = databases.getDocument(
+        "6465138ecda20c9f16fc",
+        "646513d8bddffd5663f7",
+        id
+      );
+      promise.then(
+        function (response) {
+          setUser({
+            company: response.company,
+            role: response.role,
+            address: response.address,
+            bio: response.bio,
+          });
+          setExistProfile(true);
+        },
+        function (err) {
+          console.log(err);
+          setExistProfile(false);
+        }
+      );
+    };
     getUserProfile();
-  }, []);
-  const getUserProfile = async () => {
-    const promise = databases.getDocument(
-      "6465138ecda20c9f16fc",
-      "646513d8bddffd5663f7",
-      userDetails.$id
-    );
-    promise.then(
-      function (response) {
-        
-        setUser({
-          company: response.company,
-          role: response.role,
-          address: response.address,
-          bio: response.bio,
-        });
-        setExistProfile(true);
-      },
-      function (err) {
-        console.log(err);
-        setExistProfile(false);
-      }
-    );
-  };
-  const handleSubmit = async (e) => {
+  }, [id,handleSubmit]);
+
+  async function handleSubmit(e) {
     e.preventDefault();
     if (existProfile) {
       databases.updateDocument(
         "6465138ecda20c9f16fc",
         "646513d8bddffd5663f7",
-        userDetails.$id,
+        id,
         user
       );
     } else {
       const promise = databases.createDocument(
         "6465138ecda20c9f16fc",
         "646513d8bddffd5663f7",
-        userDetails.$id,
+        id,
         user
       );
       promise.then(
@@ -60,10 +60,11 @@ const EditProfile = ({ show, setShow, userDetails, getProfile }) => {
           console.log(err);
         }
       );
+      
     }
 
     // window.location.reload();
-    getProfile(userDetails?.$id);
+    getProfile(id);
 
     setShow(false);
   };

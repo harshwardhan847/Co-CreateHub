@@ -170,11 +170,11 @@ const PencilDropdown = ({
             name="Brush Size"
             id=""
             min={1}
-            value={settings.brushSize}
+            value={settings?.brushSize || ""}
             max={100}
             className={`${eraser ? "" : "w-full"}`}
             onChange={(e) =>
-              setSettings({ ...settings, brushSize: e.target.value })
+              setSettings({ ...settings, brushSize: e?.target?.value })
             }
           />
         )}

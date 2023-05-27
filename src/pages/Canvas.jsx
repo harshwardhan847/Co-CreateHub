@@ -40,7 +40,7 @@ const Canvas = ({ settings, setSettings }) => {
     }
     setSettings({
       ...settings,
-      brushColor: settings.canvasColor,
+      brushColor: settings?.canvasColor,
     });
   }
   async function downloadImage(imageSrc, nameOfDownload = "my-image.jpeg") {
@@ -61,6 +61,7 @@ const Canvas = ({ settings, setSettings }) => {
     window.URL.revokeObjectURL(href);
   }
   function handlePencilClick(e) {
+    e.preventDefault();
     if (pencil) {
       setpencil(false);
       return;
@@ -71,6 +72,7 @@ const Canvas = ({ settings, setSettings }) => {
     setshowCanvasBackgroundDropdown(false);
   }
   function handleBackgroundClick(e) {
+    e.preventDefault();
     if (showCanvasBackgroundDropdown) {
       setshowCanvasBackgroundDropdown(false);
     } else {
@@ -80,7 +82,7 @@ const Canvas = ({ settings, setSettings }) => {
       setpencil(false);
     }
   }
-  function handleDownloadClick() {
+  function handleDownloadClick(e) {
     const data = canvasDraw?.current
       ?.getDataURL("img/jpeg", "", settings?.canvasColor)
       .replace("image/jpeg", "image/octet-stream");
@@ -88,7 +90,7 @@ const Canvas = ({ settings, setSettings }) => {
     image.src = data;
     downloadImage(image.src);
   }
-  function handleMoreClick() {
+  function handleMoreClick(e) {
     if (more) {
       setMore(false);
     } else {
@@ -179,19 +181,19 @@ const Canvas = ({ settings, setSettings }) => {
         ref={canvasDraw}
         // onChange={}
         loadTimeOffset={0}
-        lazyRadius={Number(settings.lazyRadius)}
-        brushRadius={Number(settings.brushSize)}
-        brushColor={settings.brushColor}
+        lazyRadius={Number(settings?.lazyRadius)}
+        brushRadius={Number(settings?.brushSize)}
+        brushColor={settings?.brushColor}
         // catenaryColor={"#0a0302"}
-        gridColor={settings.gridColor}
-        hideGrid={settings.showGrids}
+        gridColor={settings?.gridColor}
+        hideGrid={settings?.showGrids}
         canvasWidth={window.innerWidth - 230}
         canvasHeight={window.innerHeight}
         disabled={false}
         imgSrc={""}
         // saveData={`${canvasDraw?.current}`}
         immediateLoading={true}
-        hideInterface={settings.hideInterface}
+        hideInterface={settings?.hideInterface}
         gridSizeX={25}
         gridSizeY={25}
         gridLineWidth={0.5}
@@ -201,7 +203,7 @@ const Canvas = ({ settings, setSettings }) => {
         enablePanAndZoom={true}
         mouseZoomFactor={0.001}
         zoomExtents={{ min: 0.33, max: 3 }}
-        backgroundColor={settings.canvasColor}
+        backgroundColor={settings?.canvasColor}
       />
     </div>
   );
