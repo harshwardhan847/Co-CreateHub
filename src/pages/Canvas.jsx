@@ -12,7 +12,7 @@ import CanvasDraw from "react-canvas-draw";
 import PencilDropdown from "../components/PencilDropdown";
 import MoreDropdown from "../components/MoreDropdown";
 // import { client, account, databases } from "../appwrite/appwriteConfig";
-const Canvas = ({ settings, setSettings,canvasData }) => {
+const Canvas = ({ settings, setSettings, canvasData, setProject, project }) => {
   const canvasDraw = useRef();
   const [more, setMore] = useState(false);
   const [pencil, setpencil] = useState(false);
@@ -25,9 +25,16 @@ const Canvas = ({ settings, setSettings,canvasData }) => {
   //   console.log(context);
   //   context.fillRect(200, 50, 200, 200);
   // });
-
+  // useEffect(() => {
+  //   console.log(canvasData);
+  //   if(canvasData){
+  //     console.log(canvasData);
+  //     canvasDraw?.current?.loadSaveData(canvasData, true);
+  //   }
+  // }, [canvasData]);
+  // console.log(canvasData);
   useEffect(() => {
-    setSettings(JSON.parse(localStorage.getItem("canvasSettings")));
+    // setSettings(JSON.parse(localStorage.getItem("canvasSettings")));
   }, [setSettings]);
   function handleEraserClick() {
     if (eraser) {
@@ -100,7 +107,7 @@ const Canvas = ({ settings, setSettings,canvasData }) => {
       setshowCanvasBackgroundDropdown(false);
     }
   }
-  function onLeave(){
+  function onLeave() {
     seteraser(false);
     setpencil(false);
     setMore(false);
@@ -109,7 +116,10 @@ const Canvas = ({ settings, setSettings,canvasData }) => {
 
   return (
     <div className="w-full h-full relative bg-slate-600">
-      <ul onMouseLeave={onLeave} className="absolute z-10 bg-white left-[50%] flex items-center gap-6 text-lg font-semibold p-4 rounded-3xl top-3 shadow-xl border translate-x-[-50%]">
+      <ul
+        onMouseLeave={onLeave}
+        className="absolute z-10 bg-white left-[50%] flex items-center gap-6 text-lg font-semibold p-4 rounded-3xl top-3 shadow-xl border translate-x-[-50%]"
+      >
         <li>
           <TfiPencil
             className="inline font-black text-xl cursor-pointer"
@@ -179,7 +189,12 @@ const Canvas = ({ settings, setSettings,canvasData }) => {
 
       <CanvasDraw
         ref={canvasDraw}
-        // onChange={}
+        onChange={() => {
+          setProject({
+            ...project,
+            canvas: canvasDraw.current.getSaveData(),
+          });
+        }}
         loadTimeOffset={0}
         lazyRadius={Number(settings?.lazyRadius)}
         brushRadius={Number(settings?.brushSize)}

@@ -50,6 +50,25 @@ const Room = () => {
       }
     );
   }
+  async function saveProject({ html, css, js, title }) {
+    const promise = databases.updateDocument(
+      process.env.REACT_APP_DB_ID,
+      process.env.REACT_APP_PROJECTS_COLLECTION_ID,
+      params.projectId,
+      {
+        ...project,
+        src: JSON.stringify({ html, css, js, title }),
+      }
+    );
+    promise.then(
+      function (response) {
+        console.log(response);
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  }
   const [canvasSettings, setCanvasSettings] = useState({
     brushSize: 10,
     brushColor: "#000",
@@ -68,47 +87,55 @@ const Room = () => {
     <div className="w-screen h-screen grid grid-cols-[230px,1fr] ">
       <div className="aside bg-slate-800 w-full h-full text-white p-2">
         <h1 className="">{project?.name}</h1>
-          <ul className="border w-full text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
-            <li className="w-1/2">
-              <button
-                className={`inline-block w-full px-4 py-2   rounded-l-lg  focus:outline-none  ${
-                  editor
-                    ? "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
-                    : ""
-                }`}
-                aria-current="page"
-                onClick={() => {
-                  setEditor(true);
-                  localStorage.setItem(
-                    "canvasSettings",
-                    JSON.stringify(canvasSettings)
-                  );
-                }}
-              >
-                Code
-              </button>
-            </li>
-            <li className="w-1/2">
-              <button
-                onClick={() => {
-                  setEditor(false);
-                }}
-                className={`inline-block w-full px-4 py-2   rounded-r-lg  focus:outline-none ${
-                  editor
-                    ? ""
-                    : "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
-                }`}
-              >
-                Board
-              </button>
-            </li>
-          </ul>
+        <ul className="border w-full text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+          <li className="w-1/2">
+            <button
+              className={`inline-block w-full px-4 py-2   rounded-l-lg  focus:outline-none  ${
+                editor
+                  ? "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
+                  : ""
+              }`}
+              aria-current="page"
+              onClick={() => {
+                setEditor(true);
+                saveProject(code);
+
+                localStorage.setItem(
+                  "canvasSettings",
+                  JSON.stringify(canvasSettings)
+                );
+              }}
+            >
+              Code
+            </button>
+          </li>
+          <li className="w-1/2">
+            <button
+              onClick={() => {
+                setEditor(false);
+              }}
+              className={`inline-block w-full px-4 py-2   rounded-r-lg  focus:outline-none ${
+                editor
+                  ? ""
+                  : "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
+              }`}
+            >
+              Board
+            </button>
+          </li>
+        </ul>
       </div>
       <main>
         {editor ? (
           <Editor code={code} src={project?.src} setCode={setCode} />
         ) : (
-          <Canvas setProject={setProject} canvasData={project.canvas} settings={canvasSettings} setSettings={setCanvasSettings} />
+          <Canvas
+            setProject={setProject}
+            project={project}
+            canvasData={project?.canvas}
+            settings={canvasSettings}
+            setSettings={setCanvasSettings}
+          />
         )}
       </main>
     </div>

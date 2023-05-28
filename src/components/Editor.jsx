@@ -18,7 +18,6 @@ import Result from "./Result";
 // If you need dynamic extensions, use React.useMemo to minimize reference changes
 // which cause costly re-renders.
 const Editor = ({ code, setCode }) => {
-  const [save, setSave] = useState(false);
   const [language, setLanguage] = useState(html());
   const extensions = [language];
 
