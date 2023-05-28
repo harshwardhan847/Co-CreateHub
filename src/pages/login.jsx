@@ -18,9 +18,10 @@ const Login = () => {
         navigate("/profile", {
           state: {
             userId: response?.$id,
-            name: response?.name
+            name: response?.name,
           },
         });
+        localStorage.setItem("userId", response?.$id);
       },
       function (err) {
         console.log(err);

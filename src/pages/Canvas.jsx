@@ -12,7 +12,7 @@ import CanvasDraw from "react-canvas-draw";
 import PencilDropdown from "../components/PencilDropdown";
 import MoreDropdown from "../components/MoreDropdown";
 // import { client, account, databases } from "../appwrite/appwriteConfig";
-const Canvas = ({ settings, setSettings }) => {
+const Canvas = ({ settings, setSettings,canvasData }) => {
   const canvasDraw = useRef();
   const [more, setMore] = useState(false);
   const [pencil, setpencil] = useState(false);
@@ -191,7 +191,7 @@ const Canvas = ({ settings, setSettings }) => {
         canvasHeight={window.innerHeight}
         disabled={false}
         imgSrc={""}
-        // saveData={`${canvasDraw?.current}`}
+        saveData={canvasData}
         immediateLoading={true}
         hideInterface={settings?.hideInterface}
         gridSizeX={25}

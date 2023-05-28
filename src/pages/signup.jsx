@@ -31,6 +31,7 @@ const id = uuidv4();
             name: response?.name
           },
         }); //success
+        localStorage.setItem("userId",response?.$id)
       },
       function (err) {
         console.log(err); //failure

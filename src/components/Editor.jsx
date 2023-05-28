@@ -17,15 +17,11 @@ import Result from "./Result";
 // Define the extensions outside the component for the best performance.
 // If you need dynamic extensions, use React.useMemo to minimize reference changes
 // which cause costly re-renders.
-const Editor = () => {
+const Editor = ({ code, setCode }) => {
   const [save, setSave] = useState(false);
   const [language, setLanguage] = useState(html());
   const extensions = [language];
-  const [code, setCode] = useState({
-    html: "hello world\n\n\n\n",
-    css: "*{\n   margin:0;\n   padding:0;\n}\n",
-    js: `console.log("hello world");\n\n\n\n`,
-  });
+
   const [tabs, setTabs] = useState({
     htmlEditor: true,
     cssEditor: false,
@@ -42,7 +38,6 @@ const Editor = () => {
   }
 
   const params = useParams();
-  console.log(params);
   const editor = useRef();
 
   const { setContainer } = useCodeMirror({
@@ -95,17 +90,47 @@ const Editor = () => {
   //     unsubscribe(() => {});
   //   };
   // }, [params?.roomId, code]);
-  console.log(code);
+
+  const srcCode = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${code.title}</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        </head>
+        <body>
+        ${code.html}
+        </body>
+        <style>${code.css}</style>
+        <script>${code.js}</script>
+        </html>
+        `;
+  const [src, setSrc] = useState(srcCode);
+  function sendCodeToDatabase({ html, css, js, title }) {
+    const promise = databases.updateDocument(
+      process.env.REACT_APP_DB_ID,
+      process.env.REACT_APP_PROJECTS_COLLECTION_ID,
+      params.projectId,
+      {
+        src: JSON.stringify({ html, css, js, title }),
+      }
+    );
+    promise.then(
+      function (response) {
+        console.log(response);
+      },
+      function (err) {
+        console.log(err);
+      }
+    );
+  }
+
   function handleSaveAndRun() {
-    if (!save) {
-      setSave(true);
-      // setTimeout(() => {
-      // setSave(false);
-      // }, 500);
-    }
-    else{
-      setSave(false);
-    }
+    setSrc(srcCode);
+    sendCodeToDatabase(code);
   }
   function htmlEditorBtnHandler() {
     setTabs({
@@ -133,11 +158,11 @@ const Editor = () => {
   }
   return (
     <div className=" w-full">
-      <div class="border-b flex justify-between items-center border-gray-200 dark:border-gray-700 bg-slate-950 w-full">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
-          <li class="mr-2">
+      <div className="border-b flex justify-between items-center border-gray-200 dark:border-gray-700 bg-slate-950 w-full">
+        <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+          <li className="mr-2">
             <button
-              class={`inline-flex items-center gap-1 p-4   rounded-t-lg  group ${
+              className={`inline-flex items-center gap-1 p-4   rounded-t-lg  group ${
                 tabs.htmlEditor
                   ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
                   : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 border-b-2 border-transparent"
@@ -148,9 +173,9 @@ const Editor = () => {
               Html
             </button>
           </li>
-          <li class="mr-2">
+          <li className="mr-2">
             <button
-              class={`inline-flex items-center gap-1 p-4  rounded-t-lg ${
+              className={`inline-flex items-center gap-1 p-4  rounded-t-lg ${
                 tabs.cssEditor
                   ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
                   : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 border-b-2 border-transparent"
@@ -162,9 +187,9 @@ const Editor = () => {
               Css
             </button>
           </li>
-          <li class="mr-2">
+          <li className="mr-2">
             <button
-              class={`inline-flex items-center gap-1 p-4 rounded-t-lg ${
+              className={`inline-flex items-center gap-1 p-4 rounded-t-lg ${
                 tabs.jsEditor
                   ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
                   : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 border-b-2 border-transparent"
@@ -180,7 +205,7 @@ const Editor = () => {
           <button
             onClick={handleSaveAndRun}
             type="button"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             Save & Run
           </button>
@@ -189,13 +214,7 @@ const Editor = () => {
       </div>
       <div className="flex">
         <div className="" ref={editor} />
-        <Result
-          css={code.css}
-          html={code.html}
-          js={code.js}
-          title={"harsh"}
-          save={save}
-        />
+        <Result title={code.title} src={src} />
       </div>
     </div>
   );
