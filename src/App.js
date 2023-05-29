@@ -8,6 +8,7 @@ import Canvas from "./pages/Canvas.jsx";
 import FirstScreen from "./pages/FirstScreen.jsx";
 import Home from "./pages/Home.jsx";
 import CreateProject from "./pages/CreateProject.jsx";
+import FullScreenResult from "./pages/FullScreenResult.jsx";
 function App() {
   return (
     <div className="App w-screen h-screen">
@@ -21,6 +22,7 @@ function App() {
           <Route path="/createProject" element={<CreateProject />} />
           <Route path="/project/:projectId" element={<Room />} />
           <Route path="/canvas/:projectId" element={<Canvas />} />
+          <Route path="/result/:projectId" element={<FullScreenResult />} />
         </Routes>
       </BrowserRouter>
     </div>

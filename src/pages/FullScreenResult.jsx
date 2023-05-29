@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { databases } from "../appwrite/appwriteConfig";
-import { BiLike } from "react-icons/bi";
-const ProjectsCard = ({ name, projectId, likes }) => {
-  const navigate = useNavigate();
+import { useParams } from "react-router-dom";
+
+const FullScreenResult = () => {
+  const params = useParams();
+  console.log(params);
   const [code, setCode] = useState({
     html: "",
     css: "",
@@ -44,7 +45,7 @@ const ProjectsCard = ({ name, projectId, likes }) => {
     const promise = databases.getDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
-      projectId
+      params?.projectId
     );
     promise.then(
       (response) => {
@@ -67,37 +68,16 @@ const ProjectsCard = ({ name, projectId, likes }) => {
   useEffect(() => {
     getProject();
   }, []);
-  function clickHandler() {
-    console.log("clicked");
-    navigate("/project/" + projectId);
-  }
   return (
-    <div className="border-2 relative border-dashed border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64 ">
-      <div className="w-full absolute h-full opacity-10 from-black to-white z-20 flex items-end justify-start"></div>
-      <div
-        className="text-white absolute z-30 flex items-end justify-start w-full h-full cursor-pointer  bg-gradient-to-t "
-        onClick={clickHandler}
-      >
-        <div className="flex justify-between items-center w-full bg-blue-600 p-2">
-          <div className=" text-lg font-medium font-sans ">{name}</div>
-          <div className=" text-lg font-medium font-sans flex items-center">
-            <BiLike className="inline text-xl h-full mr-1"/>
-            {likes}
-          </div>
-        </div>
-      </div>
-      <div className="w-full h-full">
-        <iframe
-          srcDoc={src}
-          scrolling="no"
-          frameborder="0"
-          title={name}
-          sandbox="allow-scripts"
-          className="w-full h-full bg-white overflow-hidden"
-        ></iframe>
-      </div>
-    </div>
+    <iframe
+      srcDoc={src}
+      title={params?.projectId}
+      sandbox="allow-scripts"
+      frameborder="0"
+      className="w-full h-screen"
+      allow-same-origin
+    ></iframe>
   );
 };
 
-export default ProjectsCard;
+export default FullScreenResult;

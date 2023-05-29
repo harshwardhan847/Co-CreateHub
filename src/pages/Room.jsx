@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Editor from "../components/Editor";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Canvas from "./Canvas";
 import { databases } from "../appwrite/appwriteConfig";
 
 const Room = () => {
-  const location = useLocation();
   const params = useParams();
   const [editor, setEditor] = useState(true);
   const [project, setProject] = useState({
@@ -16,13 +15,13 @@ const Room = () => {
       js: `console.log("hello world");\n\n\n\n`,
     },
     private: false,
-    like: 0,
+    likes: 0,
     canvas: "",
   });
   const [code, setCode] = useState({
-    html: "",
-    css: "",
-    js: "",
+    html: " ",
+    css: " ",
+    js: " ",
     title: project.name,
   });
   function getProject() {
@@ -50,14 +49,19 @@ const Room = () => {
       }
     );
   }
-  async function saveProject({ html, css, js, title }) {
+  async function saveProject(code) {
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
       params.projectId,
       {
         ...project,
-        src: JSON.stringify({ html, css, js, title }),
+        src: JSON.stringify({
+          html: code?.html,
+          css: code?.css,
+          js: code?.js,
+          title: code?.title,
+        }),
       }
     );
     promise.then(

@@ -3,20 +3,14 @@ import { useCodeMirror } from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
-import { client, databases } from "../appwrite/appwriteConfig";
+import { databases } from "../appwrite/appwriteConfig";
 import { useParams } from "react-router-dom";
 import { AiFillHtml5 } from "react-icons/ai";
 import { FaCss3Alt } from "react-icons/fa";
 import { RiSettingsFill } from "react-icons/ri";
 import { SiJavascript } from "react-icons/si";
 import Result from "./Result";
-// import { basicSetup } from "codemirror";
-// import { historyField } from "@codemirror/commands";
-// import { defaultKeymap } from "@codemirror/commands";
 
-// Define the extensions outside the component for the best performance.
-// If you need dynamic extensions, use React.useMemo to minimize reference changes
-// which cause costly re-renders.
 const Editor = ({ code, setCode }) => {
   const [language, setLanguage] = useState(html());
   const extensions = [language];
@@ -27,12 +21,12 @@ const Editor = ({ code, setCode }) => {
     jsEditor: false,
   });
   function getCurrentEditorCode() {
-    if (tabs.cssEditor) {
-      return code.css;
-    } else if (tabs.jsEditor) {
-      return code.js;
-    } else {
-      return code.html;
+    if (tabs?.cssEditor) {
+      return code?.css;
+    } else if (tabs?.jsEditor) {
+      return code?.js;
+    } else if (tabs?.htmlEditor) {
+      return code?.html;
     }
   }
 
@@ -64,7 +58,6 @@ const Editor = ({ code, setCode }) => {
           html: value,
         });
       }
-      localStorage.setItem("myValue", value);
     },
   });
 
@@ -73,22 +66,6 @@ const Editor = ({ code, setCode }) => {
       setContainer(editor.current);
     }
   }, [setContainer]);
-  // useEffect(() => {
-  //   const unsubscribe = client.subscribe(
-  //     `databases.6465138ecda20c9f16fc.collections.64665b3ccc38f6b475fd.documents.${params?.roomId}`,
-
-  //     (response) => {
-  //       console.log(response?.payload);
-  //       // code.current = response?.payload?.code;
-  //       setCode(response?.payload?.code);
-  //       console.log(code);
-  //     }
-  //   );
-
-  //   return () => {
-  //     unsubscribe(() => {});
-  //   };
-  // }, [params?.roomId, code]);
 
   const srcCode = `
   <!DOCTYPE html>
@@ -97,24 +74,29 @@ const Editor = ({ code, setCode }) => {
   <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>${code.title}</title>
+        <title>${code?.title}</title>
         <script src="https://cdn.tailwindcss.com"></script>
         </head>
         <body>
-        ${code.html}
+        ${code?.html}
         </body>
-        <style>${code.css}</style>
-        <script>${code.js}</script>
+        <style>${code?.css}</style>
+        <script>${code?.js}</script>
         </html>
         `;
   const [src, setSrc] = useState(srcCode);
-  function sendCodeToDatabase({ html, css, js, title }) {
+  function sendCodeToDatabase(code) {
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
       params.projectId,
       {
-        src: JSON.stringify({ html, css, js, title }),
+        src: JSON.stringify({
+          html: code?.html,
+          css: code?.css,
+          js: code?.js,
+          title: code?.title,
+        }),
       }
     );
     promise.then(
@@ -213,7 +195,7 @@ const Editor = ({ code, setCode }) => {
       </div>
       <div className="flex">
         <div className="" ref={editor} />
-        <Result title={code.title} src={src} />
+        <Result title={code?.title} src={src} />
       </div>
     </div>
   );

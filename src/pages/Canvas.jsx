@@ -13,28 +13,23 @@ import PencilDropdown from "../components/PencilDropdown";
 import MoreDropdown from "../components/MoreDropdown";
 // import { client, account, databases } from "../appwrite/appwriteConfig";
 const Canvas = ({ settings, setSettings, canvasData, setProject, project }) => {
+  console.log(canvasData);
   const canvasDraw = useRef();
   const [more, setMore] = useState(false);
   const [pencil, setpencil] = useState(false);
   const [eraser, seteraser] = useState(false);
   const [showCanvasBackgroundDropdown, setshowCanvasBackgroundDropdown] =
     useState(false);
-  // useEffect(() => {
-  //   const canvas = document.getElementsByTagName("canvas");
-  //   let context = canvas[0].getContext("2d");
-  //   console.log(context);
-  //   context.fillRect(200, 50, 200, 200);
-  // });
-  // useEffect(() => {
-  //   console.log(canvasData);
-  //   if(canvasData){
-  //     console.log(canvasData);
-  //     canvasDraw?.current?.loadSaveData(canvasData, true);
-  //   }
-  // }, [canvasData]);
-  // console.log(canvasData);
+  
   useEffect(() => {
-    // setSettings(JSON.parse(localStorage.getItem("canvasSettings")));
+    console.log(canvasData);
+    if(canvasData){
+      console.log(canvasData);
+      canvasDraw?.current?.loadSaveData(canvasData, true);
+    }
+  }, []);
+  useEffect(() => {
+    setSettings(JSON?.parse(localStorage?.getItem("canvasSettings")));
   }, [setSettings]);
   function handleEraserClick() {
     if (eraser) {

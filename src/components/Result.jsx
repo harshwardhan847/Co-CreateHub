@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { databases } from "../appwrite/appwriteConfig";
+import React from "react";
 
-const Result = ({ title,src }) => {
- 
+const Result = ({ title, src }) => {
+  function clickHandler(){
 
+  }
   return (
-    <iframe
-      srcDoc={src}
-      title={title}
-      sandbox="allow-scripts"
-      frameborder="0"
-      className="w-full h-screen"
-    ></iframe>
+    <>
+    <div className="absolute bottom-0 right-0 m-5 cursor-pointer" onClick={clickHandler}>
+      Full Screen
+    </div>
+      <iframe
+        srcDoc={src}
+        title={title}
+        sandbox="allow-scripts"
+        frameborder="0"
+        className="w-full h-screen "
+      ></iframe>
+    </>
   );
 };
 
