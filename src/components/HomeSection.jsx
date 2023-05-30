@@ -12,7 +12,7 @@ const HomeSection = () => {
     const promise = databases.listDocuments(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
-      [Query.orderDesc("likes"), Query.limit(4)]
+      [Query.orderDesc("noOfLikes"), Query.limit(4)]
     );
     promise.then(
       (response) => {
@@ -40,16 +40,17 @@ const HomeSection = () => {
       }
     );
   }
-  function getProject() {
-    getTopProjects();
-    getRecentlyBuild();
-  }
+  
+    
+  
   useEffect(() => {
     console.log("runned");
-    getProject();
+    getTopProjects();
+    getRecentlyBuild();
   }, []);
   return (
     <div>
+      {console.log(topProjects)}
       <h2 className="text-5xl text-white mb-4">Top Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         {topProjects?.map((element) => {
@@ -58,7 +59,7 @@ const HomeSection = () => {
             <ProjectsCard
               projectId={element?.projectId}
               name={element?.name}
-              likes={element?.likes}
+              likes={element?.noOfLikes}
               src={element?.src}
               key={element?.projectId}
             />
@@ -74,7 +75,7 @@ const HomeSection = () => {
             <BigProjectCard
               projectId={element?.projectId}
               name={element?.name}
-              likes={element?.likes}
+              likes={element?.noOfLikes}
               src={element?.src}
               key={element?.projectId}
             />

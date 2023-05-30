@@ -30,7 +30,7 @@ const MyProjects = () => {
     const promise = databases.listDocuments(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
-      [Query.orderAsc("likes"), Query.equal("userId", userId), Query.limit(4)]
+      [Query.orderDesc("noOfLikes"), Query.equal("userId", userId), Query.limit(4)]
     );
     promise.then(
       (response) => {
@@ -56,7 +56,7 @@ const MyProjects = () => {
             <ProjectsCard
               projectId={element?.projectId}
               name={element?.name}
-              likes={element?.likes}
+              likes={element?.noOfLikes}
               src={element?.src}
             />
           );
@@ -71,7 +71,7 @@ const MyProjects = () => {
             <BigProjectCard
               projectId={element?.projectId}
               name={element?.name}
-              likes={element?.likes}
+              likes={element?.noOfLikes}
               src={element?.src}
             />
           );

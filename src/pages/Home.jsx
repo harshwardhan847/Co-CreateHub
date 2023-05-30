@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProjectsCard from "../components/ProjectsCard";
 import HomeSection from "../components/HomeSection";
 import NotificationDropdown from "../components/NotificationDropdown";
@@ -9,6 +9,7 @@ import Faq from "../components/Faq";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { databases } from "../appwrite/appwriteConfig";
 
 const Home = () => {
   const [tab, setTab] = useState("Home");
@@ -80,6 +81,10 @@ const Home = () => {
   function createNewProject() {
     navigate("/createProject");
   }
+  // useEffect(()=>{
+  //   databases.deleteDocument(process.env.REACT_APP_DB_ID,
+  //     process.env.REACT_APP_PROJECTS_COLLECTION_ID,"7818fdd8-0fee-4603-9c2c-f64994f581d6")
+  // })
   return (
     <div className="overflow-hidden">
       <div className="antialiased bg-gray-50 dark:bg-gray-900 ">
