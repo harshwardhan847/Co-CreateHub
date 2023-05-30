@@ -11,7 +11,7 @@ const FirstScreen = () => {
     const promise = account.get();
     promise.then(
       function (response) {
-        navigate("/profile", {
+        navigate("/home/"+response?.$id, {
           state: {
             userId: response?.$id,
             name: response?.name

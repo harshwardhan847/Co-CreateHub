@@ -64,7 +64,7 @@ const MyProjects = ({ setLoading }) => {
     <>
       <h2 className="text-5xl text-white mb-4">Your Top Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-        {topProjects.length > 0 ? (
+        {topProjects?.length > 0 ? (
           topProjects?.map((element) => {
             return (
               <ProjectsCard
@@ -85,7 +85,7 @@ const MyProjects = ({ setLoading }) => {
       <FeatureCard />
       <Heading text="Your Projects" />
       <div className="grid grid-cols-2 gap-4 mb-4">
-        {allProjects.length > 0 ? (
+        {allProjects?.length > 0 ? (
           allProjects?.map((element) => {
             return (
               <BigProjectCard

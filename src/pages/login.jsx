@@ -7,6 +7,7 @@ const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    id:""
   });
 
   const loginUser = async (e) => {
@@ -15,13 +16,14 @@ const Login = () => {
     promise.then(
       function (response) {
         console.log(response);
-        navigate("/profile", {
+        navigate("/home/"+response?.userId, {
           state: {
             userId: response?.$id,
             name: response?.name,
+            id: response?.$id
           },
         });
-        localStorage.setItem("userId", response?.$id);
+        localStorage.setItem("userId", response?.userId);
       },
       function (err) {
         console.log(err);

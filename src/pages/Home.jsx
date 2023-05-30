@@ -11,9 +11,13 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { databases } from "../appwrite/appwriteConfig";
 import LoadingBar from "react-top-loading-bar";
-
+import { RiAddFill } from "react-icons/ri";
+import { AiOutlineHome } from "react-icons/ai";
+import { GoProject } from "react-icons/go";
+import { BiCommentDots } from "react-icons/bi";
+import { FaQuestion } from "react-icons/fa";
 const Home = () => {
-  const [loading, setLoading]= useState(0);
+  const [loading, setLoading] = useState(0);
   const [tab, setTab] = useState("Home");
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
@@ -25,7 +29,9 @@ const Home = () => {
     if (tab === "Home") {
       return <HomeSection loading={loading} setLoading={setLoading} />;
     } else if (tab === "Community") {
-      return <Community loading={loading} setLoading={setLoading} search={search} />;
+      return (
+        <Community loading={loading} setLoading={setLoading} search={search} />
+      );
     } else if (tab === "Projects") {
       return <MyProjects loading={loading} setLoading={setLoading} />;
     } else if (tab === "Docs") {
@@ -90,7 +96,7 @@ const Home = () => {
   return (
     <div className="overflow-hidden">
       <LoadingBar
-        color='#2563EB'
+        color="#2563EB"
         waitingTime={150}
         progress={loading}
         onLoaderFinished={() => setLoading(0)}
@@ -262,6 +268,7 @@ const Home = () => {
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg  group mt-4`}
                 >
+                  <AiOutlineHome className="inline mr-1" />
                   <span className="">Home</span>
                 </button>
               </li>
@@ -274,6 +281,7 @@ const Home = () => {
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg  group`}
                 >
+                  <AiOutlineHome className="inline mr-1" />
                   <span className="">Comunity</span>
                 </button>
               </li>
@@ -286,6 +294,7 @@ const Home = () => {
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   }  rounded-lg group`}
                 >
+                  <GoProject className="inline mr-1 text-white" />
                   <span className="">My Projects</span>
                 </button>
               </li>
@@ -300,6 +309,7 @@ const Home = () => {
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg  group`}
                 >
+                  <AiOutlineHome className="inline mr-1" />
                   <span className="">Docs</span>
                 </button>
               </li>
@@ -312,6 +322,7 @@ const Home = () => {
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg group`}
                 >
+                  <FaQuestion className="inline mr-1" />
                   <span className="">FAQ</span>
                 </button>
               </li>
@@ -324,6 +335,7 @@ const Home = () => {
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg group`}
                 >
+                  <BiCommentDots className="inline mr-1" />
                   <span className="">Help</span>
                 </button>
                 <button
@@ -331,6 +343,7 @@ const Home = () => {
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center w-full mt-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   onClick={createNewProject}
                 >
+                  <RiAddFill className="inline text-white font-extrabold text-2xl mr-2" />
                   New Project
                 </button>
               </li>

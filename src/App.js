@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<FirstScreen />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/home/:userId" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/createProject" element={<CreateProject />} />
           <Route path="/project/:projectId" element={<Room />} />

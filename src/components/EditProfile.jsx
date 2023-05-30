@@ -34,7 +34,7 @@ const EditProfile = ({ show, setShow, id, getProfile }) => {
       );
     };
     getUserProfile();
-  }, [id,handleSubmit]);
+  }, [id, handleSubmit]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -60,14 +60,13 @@ const EditProfile = ({ show, setShow, id, getProfile }) => {
           console.log(err);
         }
       );
-      
     }
 
     // window.location.reload();
     getProfile(id);
 
     setShow(false);
-  };
+  }
 
   return (
     <div

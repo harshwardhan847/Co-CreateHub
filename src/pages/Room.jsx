@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Editor from "../components/Editor";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Canvas from "./Canvas";
 import { databases } from "../appwrite/appwriteConfig";
 import logo from "../assets/images/logo.png";
 import { AiFillLike } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
+import { BsShareFill } from "react-icons/bs";
 const Room = () => {
   const params = useParams();
+  const navigate = useNavigate()
   const userId = localStorage.getItem("userId");
   const [editor, setEditor] = useState(true);
   const [liked, setLiked] = useState(false);
@@ -55,7 +58,23 @@ const Room = () => {
       }
     );
   }
-  async function saveProject(code) {
+  function deleteProject() {
+    const promise = databases.deleteDocument(
+      process.env.REACT_APP_DB_ID,
+      process.env.REACT_APP_PROJECTS_COLLECTION_ID,
+      params.projectId
+    );
+    promise.then(
+      (response) => {
+        console.log(response);
+        navigate("/home")
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  function saveProject(code) {
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
@@ -173,70 +192,81 @@ const Room = () => {
   }
   return (
     <div className="w-screen h-screen grid grid-cols-[230px,1fr] relative ">
-      <div className="aside sticky top-0 left-0 z-50 flex flex-col bg-slate-800 w-full h-screen text-white p-2">
-        <div className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center">
-          <img
-            src={logo}
-            alt="Co Cerate Hub"
-            className="h-full w-auto rounded-full"
-          />
-          <span className="text-xl">Co Create Hub</span>
-        </div>
-        <h2>Project Name :</h2>
-        <h1 className="text-lg mb-1 capitalize font-bold">{project?.name}</h1>
-        <div className="mb-4 flex w-full justify-end">
-          <span className="flex items-center gap-1">
-            <AiFillLike
-              className={`inline text-xl h-full ${
-                liked ? "text-red-500" : "text-white"
-              } `}
-              onClick={likeClickHandler}
+      <div className="aside sticky top-0 left-0 z-50 flex flex-col justify-between bg-slate-800 w-full h-screen text-white p-2">
+        <div>
+          <div className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center">
+            <img
+              src={logo}
+              alt="Co Cerate Hub"
+              className="h-full w-auto rounded-full"
             />
-            {project?.noOfLikes}
-          </span>
-        </div>
-        <ul className="border w-full text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
-          <li className="w-1/2">
-            <button
-              className={`inline-block w-full px-4 py-2   rounded-l-lg  focus:outline-none  ${
-                editor
-                  ? "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
-                  : ""
-              }`}
-              aria-current="page"
-              onClick={() => {
-                setEditor(true);
-                saveProject(code);
+            <span className="text-xl">Co Create Hub</span>
+          </div>
 
-                localStorage.setItem(
-                  "canvasSettings",
-                  JSON.stringify(canvasSettings)
-                );
-              }}
+          <h1 className="text-lg mb-1 capitalize font-bold">
+            {" "}
+            <span className="font-normal">Project Name : </span>
+            {project?.name}
+          </h1>
+          <div className="mb-4 flex w-full justify-end">
+            <span className="flex items-center gap-1">
+              <AiFillLike
+                className={`inline text-xl h-full ${
+                  liked ? "text-red-500" : "text-white"
+                } `}
+                onClick={likeClickHandler}
+              />
+              {project?.noOfLikes}
+            </span>
+          </div>
+        </div>
+        <div>
+          <ul className="border w-full text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
+            <li className="w-1/2">
+              <button
+                className={`inline-block w-full px-4 py-2   rounded-l-lg  focus:outline-none  ${
+                  editor
+                    ? "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
+                    : ""
+                }`}
+                aria-current="page"
+                onClick={() => {
+                  setEditor(true);
+                  saveProject(code);
+
+                  localStorage.setItem(
+                    "canvasSettings",
+                    JSON.stringify(canvasSettings)
+                  );
+                }}
+              >
+                Code
+              </button>
+            </li>
+            <li className="w-1/2">
+              <button
+                onClick={() => {
+                  setEditor(false);
+                }}
+                className={`inline-block w-full px-4 py-2   rounded-r-lg  focus:outline-none ${
+                  editor
+                    ? ""
+                    : "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
+                }`}
+              >
+                Board
+              </button>
+            </li>
+          </ul>
+          <div className="flex items-center mt-4 mb-4 gap-1">
+            <MdDelete className="inline-flex text-3xl h-full w-auto  items-center justify-center p-1 border rounded-md cursor-pointer" onClick={deleteProject}  />
+            <div
+              className=" p-2 bg-blue-700 rounded-lg text-center w-full cursor-pointer"
+              onClick={shareClickHandler}
             >
-              Code
-            </button>
-          </li>
-          <li className="w-1/2">
-            <button
-              onClick={() => {
-                setEditor(false);
-              }}
-              className={`inline-block w-full px-4 py-2   rounded-r-lg  focus:outline-none ${
-                editor
-                  ? ""
-                  : "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
-              }`}
-            >
-              Board
-            </button>
-          </li>
-        </ul>
-        <div
-          className="justify-self-end mt-9 p-2 bg-blue-700 rounded-lg text-center cursor-pointer"
-          onClick={shareClickHandler}
-        >
-          Share
+              <BsShareFill className="inline-flex mr-2 text-lg"/>Share
+            </div>
+          </div>
         </div>
       </div>
       <main>
