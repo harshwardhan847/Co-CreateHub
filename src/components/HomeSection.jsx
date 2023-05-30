@@ -5,7 +5,7 @@ import BigProjectCard from "./BigProjectCard";
 import Heading from "./Heading";
 import { databases } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
-const HomeSection = () => {
+const HomeSection = ({ setLoading }) => {
   const [recentlyBuild, setRecentlyBuild] = useState([]);
   const [topProjects, setTopProjects] = useState([]);
   async function getTopProjects() {
@@ -40,16 +40,25 @@ const HomeSection = () => {
       }
     );
   }
-  
-    
-  
+
+  async function getProjects() {
+    await getTopProjects();
+    await getRecentlyBuild();
+  }
+
   useEffect(() => {
     console.log("runned");
-    getTopProjects();
-    getRecentlyBuild();
+    getProjects().then(
+      () => {
+        setLoading(100);
+      },
+      () => {
+        setLoading(100);
+      }
+    );
   }, []);
   return (
-    <div>
+    <div className="overflow-y-hidden">
       {console.log(topProjects)}
       <h2 className="text-5xl text-white mb-4">Top Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
@@ -84,12 +93,6 @@ const HomeSection = () => {
       </div>
       <Heading text="Comming Soon!" />
       <FeatureCard />
-      <div className="grid grid-cols-2 gap-4">
-        <BigProjectCard />
-        <BigProjectCard />
-        <BigProjectCard />
-        <BigProjectCard />
-      </div>
     </div>
   );
 };

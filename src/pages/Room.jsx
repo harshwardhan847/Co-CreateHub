@@ -92,7 +92,7 @@ const Room = () => {
   useEffect(() => {
     localStorage.setItem("canvasSettings", JSON.stringify(canvasSettings));
     getProject();
-  }, [canvasSettings]);
+  }, []);
   useEffect(() => {
     const likes = project?.likes;
     if (likes.includes(userId)) {
@@ -161,9 +161,19 @@ const Room = () => {
       addIdInLiked(project?.likes);
     }
   }
+  function shareClickHandler() {
+    navigator.clipboard.writeText(window.location.href).then(
+      (response) => {
+        console.log("Copied link to clipboard");
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
   return (
-    <div className="w-screen h-screen grid grid-cols-[230px,1fr] ">
-      <div className="aside bg-slate-800 w-full h-full text-white p-2">
+    <div className="w-screen h-screen grid grid-cols-[230px,1fr] relative ">
+      <div className="aside sticky top-0 left-0 z-50 flex flex-col bg-slate-800 w-full h-screen text-white p-2">
         <div className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center">
           <img
             src={logo}
@@ -222,6 +232,12 @@ const Room = () => {
             </button>
           </li>
         </ul>
+        <div
+          className="justify-self-end mt-9 p-2 bg-blue-700 rounded-lg text-center cursor-pointer"
+          onClick={shareClickHandler}
+        >
+          Share
+        </div>
       </div>
       <main>
         {editor ? (
