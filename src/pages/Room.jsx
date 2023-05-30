@@ -3,10 +3,13 @@ import Editor from "../components/Editor";
 import { useParams } from "react-router-dom";
 import Canvas from "./Canvas";
 import { databases } from "../appwrite/appwriteConfig";
-
+import logo from "../assets/images/logo.png";
+import { AiFillLike } from "react-icons/ai";
 const Room = () => {
   const params = useParams();
+  const userId = localStorage.getItem("userId");
   const [editor, setEditor] = useState(true);
+  const [liked, setLiked] = useState(false);
   const [project, setProject] = useState({
     name: "",
     src: {
@@ -15,14 +18,15 @@ const Room = () => {
       js: `console.log("hello world");\n\n\n\n`,
     },
     private: false,
-    likes: 0,
+    likes: [],
     canvas: "",
+    userId: userId,
   });
   const [code, setCode] = useState({
-    html: " ",
-    css: " ",
-    js: " ",
-    title: project.name,
+    html: "hello world\n\n\n\n",
+    css: "*{\n   margin:0;\n   padding:0;\n}\n",
+    js: `console.log("hello world");\n\n\n\n`,
+    title: project?.name,
   });
   function getProject() {
     console.log("get runned");
@@ -39,7 +43,7 @@ const Room = () => {
           name: response.name,
           src: JSON.parse(response.src),
           private: response.private,
-          like: response.like,
+          likes: response.likes,
         });
         setCode(JSON.parse(response?.src));
         console.log(JSON.parse(response?.src));
@@ -73,6 +77,7 @@ const Room = () => {
       }
     );
   }
+
   const [canvasSettings, setCanvasSettings] = useState({
     brushSize: 10,
     brushColor: "#000",
@@ -85,12 +90,95 @@ const Room = () => {
   useEffect(() => {
     localStorage.setItem("canvasSettings", JSON.stringify(canvasSettings));
     getProject();
-    console.log("runned");
-  }, []);
+  }, [canvasSettings]);
+  useEffect(() => {
+    const likes = project?.likes;
+    if (likes.includes(userId)) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
+  }, [project?.likes, userId]);
+  async function removeIdFromLiked(likesArr) {
+    const likes = likesArr.filter((c) => {
+      return c !== userId;
+    });
+    const promise = databases.updateDocument(
+      process.env.REACT_APP_DB_ID,
+      process.env.REACT_APP_PROJECTS_COLLECTION_ID,
+      params.projectId,
+      {
+        likes,
+      }
+    );
+    promise.then(
+      (response) => {
+        setProject({
+          ...project,
+          likes: response.likes,
+        });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  function addIdInLiked(likesArr) {
+    likesArr.push(userId);
+    console.log(likesArr);
+    const promise = databases.updateDocument(
+      process.env.REACT_APP_DB_ID,
+      process.env.REACT_APP_PROJECTS_COLLECTION_ID,
+      params.projectId,
+      {
+        likes: likesArr,
+      }
+    );
+    promise.then(
+      (response) => {
+        setProject({
+          ...project,
+          likes: response.likes,
+        });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+  function likeClickHandler() {
+    if (liked) {
+      setLiked(false);
+      removeIdFromLiked(project?.likes);
+    } else {
+      setLiked(true);
+      addIdInLiked(project?.likes);
+    }
+  }
   return (
     <div className="w-screen h-screen grid grid-cols-[230px,1fr] ">
       <div className="aside bg-slate-800 w-full h-full text-white p-2">
-        <h1 className="">{project?.name}</h1>
+        <div className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center">
+          <img
+            src={logo}
+            alt="Co Cerate Hub"
+            className="h-full w-auto rounded-full"
+          />
+          <span className="text-xl">Co Create Hub</span>
+        </div>
+        <h2>Project Name :</h2>
+        <h1 className="text-lg mb-1 capitalize font-bold">{project?.name}</h1>
+        <div className="mb-4 flex w-full justify-end">
+          <span className="flex items-center gap-1">
+            <AiFillLike
+              className={`inline text-xl h-full ${
+                liked ? "text-red-500" : "text-white"
+              } `}
+              onClick={likeClickHandler}
+            />
+            {project?.likes?.length}
+          </span>
+        </div>
         <ul className="border w-full text-sm font-medium text-center text-gray-500 divide-x divide-gray-200 rounded-lg shadow sm:flex dark:divide-gray-700 dark:text-gray-400">
           <li className="w-1/2">
             <button

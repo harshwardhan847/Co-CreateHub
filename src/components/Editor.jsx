@@ -195,7 +195,7 @@ const Editor = ({ code, setCode }) => {
       </div>
       <div className="flex">
         <div className="" ref={editor} />
-        <Result title={code?.title} src={src} />
+        <Result title={code?.title} src={src} projectId={params?.projectId} />
       </div>
     </div>
   );
