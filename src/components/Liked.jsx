@@ -6,9 +6,12 @@ import Heading from "./Heading";
 import FeatureCard from "./FeatureCard";
 import ProjectsCard from "./ProjectsCard";
 import { useParams } from "react-router-dom";
+import loader from "../assets/lottiefiles/loader.json";
+import Lottie from "lottie-react";
 
 const Liked = ({ setLoading }) => {
-  const [liked, setLiked] = useState([]);
+  const [liked, setLiked] = useState();
+  const [processing, setProcessing] = useState(true);
   const params = useParams();
   async function getLiked() {
     const promise = databases.getDocument(
@@ -20,9 +23,11 @@ const Liked = ({ setLoading }) => {
       (response) => {
         console.log(response);
         setLiked(response?.yourLiked);
+        setProcessing(false);
       },
       (err) => {
         console.log(err);
+        setProcessing(false);
       }
     );
   }
@@ -41,28 +46,32 @@ const Liked = ({ setLoading }) => {
   return (
     <>
       <h2 className="text-5xl text-slate-950 dark:text-white mb-4">
-        Your Top Projects
+        Your Liked Projects
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-        {liked?.length > 0 ? (
-          liked?.map((element) => {
-            return (
-              <ProjectsCard
-                projectId={element?.projectId}
-                name={element?.name}
-                likes={element?.noOfLikes}
-                src={element?.src}
-              />
-            );
-          })
-        ) : (
-          <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
-            <h2 className="font-bold text-slate-950 dark:text-white text-4xl">
-              Please Complete Profile to see your liked projects.
-            </h2>
-          </div>
-        )}
-      </div>
+      {!processing ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          {liked?.length > 0 ? (
+            liked?.map((element) => {
+                console.log(element);
+              return (
+                <ProjectsCard
+                  projectId={element?.projectId}
+                />
+              );
+            })
+          ) : (
+            <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
+              <h2 className="font-bold text-slate-950 dark:text-white text-2xl text-center">
+                Please first complete Profile to see your liked projects.
+              </h2>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
+            <Lottie animationData={loader} />
+        </div>
+      )}
       <Heading text="Try Now" />
       <FeatureCard />
     </>

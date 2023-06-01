@@ -2,8 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { databases } from "../appwrite/appwriteConfig";
 import { BiLike } from "react-icons/bi";
-const ProjectsCard = ({ name, projectId, likes }) => {
+import loader from "../assets/lottiefiles/loader.json";
+import Lottie from "lottie-react";
+
+const ProjectsCard = ({ name, projectId }) => {
   const navigate = useNavigate();
+  const [processing, setProcessing] = useState(true);
   const [code, setCode] = useState({
     html: "",
     css: "",
@@ -41,8 +45,7 @@ const ProjectsCard = ({ name, projectId, likes }) => {
     userId: "",
     noOfLikes: 0,
   });
-  function getProject() {
-    console.log("get runned");
+  async function getProject(projectId) {
     const promise = databases.getDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
@@ -62,14 +65,16 @@ const ProjectsCard = ({ name, projectId, likes }) => {
         });
         setCode(JSON.parse(response?.src));
         console.log(JSON.parse(response?.src));
+        setProcessing(false);
       },
       (err) => {
         console.log(err);
+        setProcessing(false);
       }
     );
   }
   useEffect(() => {
-    getProject();
+    getProject(projectId);
   }, []);
   function clickHandler() {
     console.log("clicked");
@@ -77,7 +82,10 @@ const ProjectsCard = ({ name, projectId, likes }) => {
   }
   return (
     <div className="border-2 relative border-dashed border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64 ">
-      <div className="w-full absolute h-full opacity-10 from-black to-white z-20 flex items-end justify-start"></div>
+      <div className="w-full absolute h-full opacity-10 from-black to-white z-20 flex items-center justify-center">
+        {processing && <Lottie animationData={loader} />}
+      </div>
+
       <div
         className="text-white absolute z-30 flex items-end justify-start w-full h-full cursor-pointer  bg-gradient-to-t "
         onClick={clickHandler}

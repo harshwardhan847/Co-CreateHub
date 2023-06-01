@@ -271,7 +271,7 @@ const Room = () => {
     );
   }, []);
   return (
-    <div className="w-screen h-screen grid sm:grid-cols-[230px,1fr] relative ">
+    <div className="w-full h-full grid sm:grid-cols-[230px,1fr] relative ">
       <div className="fixed z-[100]">
         <ToastContainer />
       </div>
@@ -359,7 +359,7 @@ const Room = () => {
           </div>
         </div>
       </div>
-      <main className="">
+      <main className=" md:h-[cal(100vh-64px)]">
         {editor ? (
           <Editor code={code} src={project?.src} setCode={setCode} />
         ) : (

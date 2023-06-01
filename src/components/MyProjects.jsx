@@ -5,9 +5,13 @@ import FeatureCard from "./FeatureCard";
 import BigProjectCard from "./BigProjectCard";
 import { databases } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
+import loader from "../assets/lottiefiles/loader.json";
+import Lottie from "lottie-react";
 const MyProjects = ({ setLoading }) => {
   const [allProjects, setallProjects] = useState([]);
   const [topProjects, setTopProjects] = useState([]);
+  const [processing, setProcessing] = useState(true);
+  const [processing2, setProcessing2] = useState(true);
   const userId = localStorage.getItem("userId");
   async function getAllProjects() {
     const promise = databases.listDocuments(
@@ -19,9 +23,11 @@ const MyProjects = ({ setLoading }) => {
       (response) => {
         console.log(response);
         setallProjects(response.documents);
+        setProcessing(false);
       },
       (err) => {
         console.log(err);
+        setProcessing(false);
       }
     );
   }
@@ -39,9 +45,11 @@ const MyProjects = ({ setLoading }) => {
       (response) => {
         console.log(response);
         setTopProjects(response.documents);
+        setProcessing2(false);
       },
       (err) => {
         console.log(err);
+        setProcessing2(false);
       }
     );
   }
@@ -62,46 +70,64 @@ const MyProjects = ({ setLoading }) => {
   }, []);
   return (
     <>
-      <h2 className="text-5xl text-slate-950 dark:text-white mb-4">Your Top Projects</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-        {topProjects?.length > 0 ? (
-          topProjects?.map((element) => {
-            return (
-              <ProjectsCard
-                projectId={element?.projectId}
-                name={element?.name}
-                likes={element?.noOfLikes}
-                src={element?.src}
-              />
-            );
-          })
-        ) : (
-          <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
-            <h2 className="font-bold text-slate-950 dark:text-white text-4xl">No Projects Yet</h2>
-          </div>
+      <h2 className="text-5xl text-slate-950 dark:text-white mb-4">
+        Your Top Projects
+      </h2>
+      {!processing2 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          {topProjects?.length > 0 ? (
+            topProjects?.map((element) => {
+              return (
+                <ProjectsCard
+                  projectId={element?.projectId}
+                  name={element?.name}
+                  likes={element?.noOfLikes}
+                  src={element?.src}
+                />
+              );
+            })
+          ) : (
+            <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
+              <h2 className="font-bold text-slate-950 dark:text-white text-4xl text-center">
+                No Projects Yet
+              </h2>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
+          <Lottie animationData={loader} />
+        </div>
       )}
-      </div>
       <Heading text="Try Now" />
       <FeatureCard />
       <Heading text="Your Projects" />
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        {allProjects?.length > 0 ? (
-          allProjects?.map((element) => {
-            return (
-              <BigProjectCard
-                projectId={element?.projectId}
-                name={element?.name}
-                likes={element?.noOfLikes}
-                src={element?.src}
-              />
-            );
-          })
-        ) : (
-          <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
-            <h2 className="font-bold text-slate-950 dark:text-white text-7xl">No Projects Yet</h2>
-          </div>
-        )}
-      </div>
+      {!processing ? (
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          {allProjects?.length > 0 ? (
+            allProjects?.map((element) => {
+              return (
+                <BigProjectCard
+                  projectId={element?.projectId}
+                  name={element?.name}
+                  likes={element?.noOfLikes}
+                  src={element?.src}
+                />
+              );
+            })
+          ) : (
+            <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
+              <h2 className="font-bold text-slate-950 dark:text-white text-7xl text-center">
+                No Projects Yet
+              </h2>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
+          <Lottie animationData={loader} />
+        </div>
+      )}
     </>
   );
 };
