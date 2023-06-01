@@ -1,12 +1,14 @@
 import React from "react";
+import SquareBg from "./square-bg/SquareBg";
 
 const About = () => {
   return (
-    <section className="text-gray-600 body-font bg-slate-950">
-      <h2 className="text-center text-5xl text-white font-medium py-12">
+    <section className="text-gray-600 body-font bg-slate-300 dark:bg-slate-950 w-full h-full relative ">
+      <SquareBg/>
+      <h2 className="text-center text-5xl text-slate-950 dark:text-white font-medium py-12 z-10 relative">
         About Us
       </h2>
-      <div className="container px-5 py-12 mx-auto flex flex-wrap">
+      <div className="container px-5 py-12 mx-auto flex flex-wrap relative z-10">
         <div className="lg:w-2/3 mx-auto">
           <div className="flex flex-wrap w-full bg-gray-100 py-32 px-10 relative mb-4">
             <img

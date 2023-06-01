@@ -36,8 +36,10 @@ const ProjectsCard = ({ name, projectId, likes }) => {
       js: `console.log("hello world");\n\n\n\n`,
     },
     private: false,
-    like: 0,
+    likes: [],
     canvas: "",
+    userId: "",
+    noOfLikes: 0,
   });
   function getProject() {
     console.log("get runned");
@@ -54,7 +56,9 @@ const ProjectsCard = ({ name, projectId, likes }) => {
           name: response.name,
           src: JSON.parse(response.src),
           private: response.private,
-          like: response.like,
+          likes: [],
+          userId: response.userId,
+          noOfLikes: response.noOfLikes,
         });
         setCode(JSON.parse(response?.src));
         console.log(JSON.parse(response?.src));
@@ -79,10 +83,10 @@ const ProjectsCard = ({ name, projectId, likes }) => {
         onClick={clickHandler}
       >
         <div className="flex justify-between items-center w-full bg-blue-600 p-2">
-          <div className=" text-lg font-medium font-sans ">{name}</div>
+          <div className=" text-lg font-medium font-sans ">{project?.name}</div>
           <div className=" text-lg font-medium font-sans flex items-center">
-            <BiLike className="inline text-xl h-full mr-1"/>
-            {likes}
+            <BiLike className="inline text-xl h-full mr-1" />
+            {project?.noOfLikes}
           </div>
         </div>
       </div>

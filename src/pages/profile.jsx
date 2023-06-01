@@ -4,6 +4,8 @@ import { useNavigate, Link, useLocation } from "react-router-dom";
 import { databases } from "../appwrite/appwriteConfig";
 import EditProfile from "../components/EditProfile";
 import LoadingBar from "react-top-loading-bar";
+import avtar from "../assets/images/avtar.jpg";
+import { MdArrowBackIosNew } from "react-icons/md";
 const Profile = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -45,7 +47,7 @@ const Profile = () => {
   };
 
   return (
-    <main className="profile-page w-full h-full dark:text-white dark:bg-slate-600">
+    <main className="profile-page relative w-full h-full dark:text-white dark:bg-slate-600">
       <EditProfile
         show={showEdit}
         setShow={setShowEdit}
@@ -57,6 +59,14 @@ const Profile = () => {
         progress={loading}
         onLoaderFinished={() => setLoading(0)}
       />
+      <div
+        className="fixed cursor-pointer rounded-full w-10 h-10 bg-white flex items-center justify-center text-2xl font-bold text-white z-50 bg-opacity-20 top-5 left-5"
+        onClick={() => {
+          navigate("/home/" + location?.state?.userId);
+        }}
+      >
+        <MdArrowBackIosNew />
+      </div>
       <section className="relative block h-500-px h-[40%] ">
         <div
           className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -99,7 +109,7 @@ const Profile = () => {
                   <div className="relative">
                     <img
                       alt="..."
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                      src={avtar}
                       className="shadow-xl rounded-full h-40 w-40 bg- object-cover relative -translate-y-[50%]"
                     />
                   </div>
@@ -172,9 +182,6 @@ const Profile = () => {
                     <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
                       {profile?.bio}
                     </p>
-                    <a href="#pablo" className="font-normal text-blue-500">
-                      Show more
-                    </a>
                   </div>
                 </div>
               </div>
@@ -186,22 +193,15 @@ const Profile = () => {
             <div className="flex flex-wrap items-center md:justify-between justify-center">
               <div className="w-full md:w-6/12 px-4 mx-auto text-center">
                 <div className="text-sm text-blueGray-500 font-semibold py-1">
-                  Made with{" "}
+                  Made with ❤ by{" "}
                   <a
-                    href="https://www.creative-tim.com/product/notus-js"
-                    className="text-blueGray-500 hover:text-gray-800"
-                    target="_blank"
-                  >
-                    Notus JS
-                  </a>{" "}
-                  by{" "}
-                  <a
-                    href="https://www.creative-tim.com"
-                    className="text-blueGray-500 hover:text-blueGray-800"
+                    href="https://harshwardhan847.netlify.app"
+                    rel="noreferrer"
+                    className="text-blue-500 underline hover:text-blue-600"
                     target="_blank"
                   >
                     {" "}
-                    Creative Tim
+                    Harsh Wardhan
                   </a>
                   .
                 </div>

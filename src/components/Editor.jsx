@@ -38,7 +38,7 @@ const Editor = ({ code, setCode }) => {
     container: editor.current,
     extensions,
     theme: "dark",
-    height: `${window.innerHeight-64}px`,
+    height: `${window.innerHeight - 64}px`,
     width: `${window.innerWidth / 2 - 230}px`,
     value: getCurrentEditorCode(),
 
@@ -140,7 +140,7 @@ const Editor = ({ code, setCode }) => {
   }
   return (
     <div className=" w-full relative">
-      <div className="border-b sticky z-50 h-16 top-0 left-0 flex justify-between items-center border-gray-200 dark:border-gray-700 bg-slate-950 w-full">
+      <div className="border-b sticky z-50 h-16 top-0 left-0 sm:flex justify-between items-center border-gray-200 dark:border-gray-700 bg-slate-950 w-full hidden">
         <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
           <li className="mr-2">
             <button
@@ -195,7 +195,7 @@ const Editor = ({ code, setCode }) => {
         </div>
       </div>
       <div className="flex">
-        <div className="" ref={editor} />
+        <div className="hidden sm:block" ref={editor} />
         <Result title={code?.title} src={src} projectId={params?.projectId} />
       </div>
     </div>

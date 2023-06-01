@@ -16,6 +16,8 @@ import { AiOutlineHome } from "react-icons/ai";
 import { GoProject } from "react-icons/go";
 import { BiCommentDots } from "react-icons/bi";
 import { FaQuestion } from "react-icons/fa";
+import logo from "../assets/images/logo.png"
+import Liked from "../components/Liked";
 const Home = () => {
   const [loading, setLoading] = useState(0);
   const [tab, setTab] = useState("Home");
@@ -34,8 +36,8 @@ const Home = () => {
       );
     } else if (tab === "Projects") {
       return <MyProjects loading={loading} setLoading={setLoading} />;
-    } else if (tab === "Docs") {
-      return <MyProjects loading={loading} setLoading={setLoading} />;
+    } else if (tab === "Liked") {
+      return  <Liked loading={loading} setLoading={setLoading}/>;
     } else if (tab === "FAQ") {
       return <Faq loading={loading} setLoading={setLoading} />;
     } else if (tab === "Help") {
@@ -75,10 +77,11 @@ const Home = () => {
     setTab("Community");
   }
   function handleProjectsClick() {
+    
     setTab("Projects");
   }
   function handleDocClick() {
-    setTab("Docs");
+    setTab("Liked");
   }
   function handleFaqClick() {
     setTab("FAQ");
@@ -144,8 +147,8 @@ const Home = () => {
                 className="flex items-center justify-between mr-4"
               >
                 <img
-                  src="https://flowbite.s3.amazonaws.com/logo.svg"
-                  className="mr-3 h-8"
+                  src={logo}
+                  className="mr-3 h-10"
                   alt="Flowbite Logo"
                 />
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
@@ -294,7 +297,7 @@ const Home = () => {
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   }  rounded-lg group`}
                 >
-                  <GoProject className="inline mr-1 text-white" />
+                  <GoProject className="inline mr-1" />
                   <span className="">My Projects</span>
                 </button>
               </li>
@@ -304,13 +307,13 @@ const Home = () => {
                 <button
                   onClick={handleDocClick}
                   className={`flex items-center p-2 text-base font-medium w-full ${
-                    tab === "Docs"
+                    tab === "Liked"
                       ? "bg-blue-600 text-white"
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg  group`}
                 >
                   <AiOutlineHome className="inline mr-1" />
-                  <span className="">Docs</span>
+                  <span className="">Liked</span>
                 </button>
               </li>
               <li>

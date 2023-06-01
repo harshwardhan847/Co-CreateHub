@@ -11,10 +11,10 @@ const FirstScreen = () => {
     const promise = account.get();
     promise.then(
       function (response) {
-        navigate("/home/"+response?.$id, {
+        navigate("/home/" + response?.$id, {
           state: {
             userId: response?.$id,
-            name: response?.name
+            name: response?.name,
           },
         });
         console.log(response);
@@ -25,11 +25,11 @@ const FirstScreen = () => {
     );
   }, []);
   return (
-    <div className="w-full">
-      <div className="w-full h-screen">
+    <div className="w-full relative">
+      <div className="w-full h-full overflow-x-hidden relative">
         <Navbar />
         <Hero />
-        <About/>
+        <About />
       </div>
     </div>
   );

@@ -62,7 +62,7 @@ const MyProjects = ({ setLoading }) => {
   }, []);
   return (
     <>
-      <h2 className="text-5xl text-white mb-4">Your Top Projects</h2>
+      <h2 className="text-5xl text-slate-950 dark:text-white mb-4">Your Top Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         {topProjects?.length > 0 ? (
           topProjects?.map((element) => {
@@ -77,9 +77,9 @@ const MyProjects = ({ setLoading }) => {
           })
         ) : (
           <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
-            <h2 className="font-bold text-white text-4xl">No Projects Yet</h2>
+            <h2 className="font-bold text-slate-950 dark:text-white text-4xl">No Projects Yet</h2>
           </div>
-        )}
+      )}
       </div>
       <Heading text="Try Now" />
       <FeatureCard />
@@ -98,7 +98,7 @@ const MyProjects = ({ setLoading }) => {
           })
         ) : (
           <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
-            <h2 className="font-bold text-white text-7xl">No Projects Yet</h2>
+            <h2 className="font-bold text-slate-950 dark:text-white text-7xl">No Projects Yet</h2>
           </div>
         )}
       </div>

@@ -71,7 +71,7 @@ const ProfileDropdown = ({ show }) => {
                 },
               });
             }}
-            className="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+            className="block py-2 w-full px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
           >
             My profile
           </button>
@@ -84,7 +84,7 @@ const ProfileDropdown = ({ show }) => {
         <li>
           <button
             onClick={handleLogout}
-            className="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="block py-2 px-4 w-full text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             Sign out
           </button>

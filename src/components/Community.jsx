@@ -49,11 +49,11 @@ const Community = ({ search }) => {
           })
         ) : (
           <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
-            <h2 className="font-bold text-white text-7xl">Not Found</h2>
+            <h2 className="font-bold text-slate-950 dark:text-white text-7xl">Not Found</h2>
           </div>
         )}
       </div>
-      <h2 className="text-5xl text-white mb-4">What's New?</h2>
+      <h2 className="text-5xl text-slate-950 dark:text-white mb-4">What's New?</h2>
       <FeatureCard />
     </>
   );
