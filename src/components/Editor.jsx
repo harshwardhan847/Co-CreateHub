@@ -46,17 +46,20 @@ const Editor = ({ code, setCode }) => {
       if (tabs.cssEditor) {
         console.log(code);
         setCode({
-          ...code,
+          html: code.html,
+          js: code.js,
           css: value,
         });
       } else if (tabs.jsEditor) {
         setCode({
-          ...code,
+          html: code.html,
+          css: code.css,
           js: value,
         });
       } else if (tabs.htmlEditor) {
         setCode({
-          ...code,
+          js: code.js,
+          css: code.css,
           html: value,
         });
       }

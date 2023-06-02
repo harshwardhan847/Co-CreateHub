@@ -31,7 +31,7 @@ const Room = () => {
     noOfLikes: 0,
   });
   const [code, setCode] = useState({
-    html: "\n\n\n\n",
+    html: "hello world\n\n\n\n",
     css: "*{\n   margin:0;\n   padding:0;\n}\n",
     js: `console.log("hello world");\n\n\n\n`,
     title: project?.name,
@@ -55,7 +55,7 @@ const Room = () => {
           noOfLikes: response.noOfLikes,
           userId: response.userId,
         });
-        setCode(JSON.parse(response?.src));
+        response?.src?setCode(JSON.parse(response?.src)):setCode(code)
         console.log(JSON.parse(response?.src));
       },
       (err) => {
