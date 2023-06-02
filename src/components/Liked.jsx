@@ -62,7 +62,7 @@ const Liked = ({ setLoading }) => {
           ) : (
             <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
               <h2 className="font-bold text-slate-950 dark:text-white text-2xl text-center">
-                Please first complete Profile to see your liked projects.
+                No Liked Projects
               </h2>
             </div>
           )}

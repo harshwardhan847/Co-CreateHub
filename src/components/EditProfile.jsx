@@ -34,9 +34,9 @@ const EditProfile = ({ show, setShow, id, getProfile }) => {
       );
     };
     getUserProfile();
-  }, [id, handleSubmit]);
+  }, [id]);
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     if (existProfile) {
       databases.updateDocument(
@@ -46,13 +46,13 @@ const EditProfile = ({ show, setShow, id, getProfile }) => {
         user
       );
     } else {
-      const promise = databases.createDocument(
+      const promise2 = databases.createDocument(
         "6465138ecda20c9f16fc",
         "646513d8bddffd5663f7",
         id,
         user
       );
-      promise.then(
+      promise2.then(
         function (response) {
           console.log(response);
         },
@@ -104,7 +104,7 @@ const EditProfile = ({ show, setShow, id, getProfile }) => {
             <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
               Edit Your Profile
             </h3>
-            <form className="space-y-6" action="#">
+            <form className="space-y-6">
               <div>
                 <label
                   htmlFor="address"

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { account } from "../appwrite/appwriteConfig";
+import { account, databases } from "../appwrite/appwriteConfig";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Blob from "../components/blob/blob";
@@ -23,16 +23,34 @@ const Signup = () => {
     promise.then(
       function (response) {
         console.log(response);
-        navigate("/profile", {
+        navigate("/login", {
           state: {
             userId: response?.$id,
             name: response?.name,
           },
         }); //success
-        localStorage.setItem("userId", response?.$id);
       },
       function (err) {
         console.log(err); //failure
+      }
+    );
+    const promise2 = databases.createDocument(
+      "6465138ecda20c9f16fc",
+      "646513d8bddffd5663f7",
+      id,
+      {
+        address: "",
+        role: "",
+        company: "",
+        bio: "",
+      }
+    );
+    promise2.then(
+      function (response) {
+        console.log(response);
+      },
+      function (err) {
+        console.log(err);
       }
     );
   };
@@ -41,7 +59,7 @@ const Signup = () => {
     <section className="h-screen relative backdrop-blur-lg dark:bg-slate-900 flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
       <Blob />
       <div className="md:w-1/3 max-w-sm z-20">
-      <Lottie animationData={animationData} />
+        <Lottie animationData={animationData} />
       </div>
       <div className="md:w-1/3 max-w-sm z-20">
         <div className=" mb-4 text-2xl dark:text-white  font-medium">

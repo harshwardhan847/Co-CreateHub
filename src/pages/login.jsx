@@ -25,7 +25,6 @@ const Login = () => {
             id: response?.$id,
           },
         });
-        localStorage.setItem("userId", response?.userId);
       },
       function (err) {
         console.log(err);

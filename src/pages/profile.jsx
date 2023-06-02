@@ -15,7 +15,7 @@ const Profile = () => {
   console.log(location);
   useEffect(() => {
     getProfileDetails(location?.state?.userId);
-  }, [location?.state?.userId]);
+  }, [location?.state?.userId, showEdit]);
 
   console.log(location);
   async function getProfileDetails(id) {
