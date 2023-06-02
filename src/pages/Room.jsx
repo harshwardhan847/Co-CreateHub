@@ -70,6 +70,8 @@ const Room = () => {
   }
 
   function saveProject(code) {
+    console.log(userId + " and " + project?.userId);
+    if (userId !== project?.userId) return;
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
@@ -258,7 +260,7 @@ const Room = () => {
     );
   }, []);
   return (
-    <div className="w-full h-full grid sm:grid-cols-[230px,1fr] relative ">
+    <div className="w-full h-full grid sm:grid-cols-[230px,1fr] relative scrollbar-hide ">
       <div className="fixed z-[100]">
         <ToastContainer />
       </div>
@@ -360,7 +362,13 @@ const Room = () => {
       </div>
       <main className=" md:h-[cal(100vh-64px)]">
         {editor ? (
-          <Editor code={code} src={project?.src} setCode={setCode} />
+          <Editor
+            code={code}
+            src={project?.src}
+            setCode={setCode}
+            currentUser={userId}
+            projectUser={project?.userId}
+          />
         ) : (
           <Canvas
             setProject={setProject}

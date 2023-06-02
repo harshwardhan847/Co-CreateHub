@@ -11,7 +11,7 @@ import { RiSettingsFill } from "react-icons/ri";
 import { SiJavascript } from "react-icons/si";
 import Result from "./Result";
 
-const Editor = ({ code, setCode }) => {
+const Editor = ({ code, setCode, projectUser, currentUser }) => {
   const [language, setLanguage] = useState(html());
   const extensions = [language];
 
@@ -91,6 +91,7 @@ const Editor = ({ code, setCode }) => {
         `;
   const [src, setSrc] = useState(srcCode);
   function sendCodeToDatabase(code) {
+    if (currentUser !== projectUser) return;
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,

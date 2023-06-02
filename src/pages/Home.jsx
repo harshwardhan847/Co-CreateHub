@@ -185,7 +185,6 @@ const Home = () => {
                   ></path>
                 </svg>
               </button>
-              {/* <!-- Notifications --> */}
 
               <button
                 type="button"
@@ -194,7 +193,6 @@ const Home = () => {
                 className="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               >
                 <span className="sr-only">View notifications</span>
-                {/* <!-- Bell icon --> */}
                 <svg
                   aria-hidden="true"
                   className="w-6 h-6"
@@ -205,7 +203,6 @@ const Home = () => {
                   <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"></path>
                 </svg>
               </button>
-              {/* <!-- Dropdown menu --> */}
               <NotificationDropdown show={dropdown.notification} />
 
               <button
@@ -223,13 +220,11 @@ const Home = () => {
                   alt="user photo"
                 />
               </button>
-              {/* <!-- Dropdown menu --> */}
               <ProfileDropdown show={dropdown.profile} />
             </div>
           </div>
         </nav>
 
-        {/* <!-- Sidebar --> */}
 
         <aside
           className="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
@@ -363,12 +358,12 @@ const Home = () => {
           </div>
         </aside>
 
-        <main className="p-4 md:ml-64 h-auto pt-20 ">
+        <main className="p-4 md:ml-64 h-auto pt-20 overflow-x-hidden ">
           {renderCardsAccTab()}
         </main>
-        <div className="md:ml-64 h-auto ">
+        {/* <div className="md:ml-64 h-auto ">
           <Footer />
-        </div>
+        </div> */}
       </div>
     </div>
   );

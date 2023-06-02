@@ -65,7 +65,7 @@ const HomeSection = ({ setLoading }) => {
     );
   }, []);
   return (
-    <div className="overflow-y-hidden">
+    <div className="overflow-y-hidden scrollbar-hide">
       <h2 className="text-5xl text-slate-950 dark:text-white mb-4">
         Top Projects
       </h2>

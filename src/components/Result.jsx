@@ -20,7 +20,7 @@ const Result = ({ title, src, projectId }) => {
         title={title}
         sandbox="allow-scripts"
         frameBorder="no"
-        className="w-screen md:w-full h-screen md:h-[cal(100vh-64px)] "
+        className="w-screen md:w-full h-screen md:h-[calc(100vh-64px)] "
       ></iframe>
     </>
   );
