@@ -44,6 +44,7 @@ const Editor = ({ code, setCode }) => {
 
     onChange: (value, viewUpdate) => {
       if (tabs.cssEditor) {
+        console.log(code);
         setCode({
           ...code,
           css: value,

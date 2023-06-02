@@ -82,34 +82,38 @@ const ProjectsCard = ({ name, projectId }) => {
     navigate("/project/" + projectId);
   }
   return (
-    <div className="border-2 relative border-dashed border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64 ">
-      <div className="w-full absolute h-full opacity-10 from-black to-white z-20 flex items-center justify-center">
-        {processing && <Lottie animationData={loader} />}
-      </div>
+    project.name && (
+      <div className="border-2 relative border-dashed border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64 ">
+        <div className="w-full absolute h-full opacity-10 from-black to-white z-20 flex items-center justify-center">
+          {processing && <Lottie animationData={loader} />}
+        </div>
 
-      <div
-        className="text-white absolute z-30 flex items-end justify-start w-full h-full cursor-pointer  bg-gradient-to-t "
-        onClick={clickHandler}
-      >
-        <div className="flex justify-between items-center w-full bg-blue-600 p-2">
-          <div className=" text-lg font-medium font-sans ">{project?.name}</div>
-          <div className=" text-lg font-medium font-sans flex items-center">
-            <BiLike className="inline text-xl h-full mr-1" />
-            {project?.noOfLikes}
+        <div
+          className="text-white absolute z-30 flex items-end justify-start w-full h-full cursor-pointer  bg-gradient-to-t "
+          onClick={clickHandler}
+        >
+          <div className="flex justify-between items-center w-full bg-blue-600 p-2">
+            <div className=" text-lg font-medium font-sans ">
+              {project?.name}
+            </div>
+            <div className=" text-lg font-medium font-sans flex items-center">
+              <BiLike className="inline text-xl h-full mr-1" />
+              {project?.noOfLikes}
+            </div>
           </div>
         </div>
+        <div className="w-full h-full">
+          <iframe
+            srcDoc={src}
+            scrolling="no"
+            frameborder="0"
+            title={name}
+            sandbox="allow-scripts"
+            className="w-full h-full bg-white overflow-hidden"
+          ></iframe>
+        </div>
       </div>
-      <div className="w-full h-full">
-        <iframe
-          srcDoc={src}
-          scrolling="no"
-          frameborder="0"
-          title={name}
-          sandbox="allow-scripts"
-          className="w-full h-full bg-white overflow-hidden"
-        ></iframe>
-      </div>
-    </div>
+    )
   );
 };
 

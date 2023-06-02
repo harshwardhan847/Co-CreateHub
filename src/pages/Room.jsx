@@ -9,9 +9,11 @@ import { MdDelete } from "react-icons/md";
 import { BsShareFill } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DeleteModal from "../components/DeleteModal";
 const Room = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const [showDeleteModal,setShowDeleteModal] = useState(false);
   const [editor, setEditor] = useState(true);
   const [liked, setLiked] = useState(false);
   const [userId, setUserId] = useState();
@@ -61,24 +63,7 @@ const Room = () => {
       }
     );
   }
-  function deleteProject() {
-    if (userId === project?.userId) {
-      const promise = databases.deleteDocument(
-        process.env.REACT_APP_DB_ID,
-        process.env.REACT_APP_PROJECTS_COLLECTION_ID,
-        params.projectId
-      );
-      promise.then(
-        (response) => {
-          console.log(response);
-          navigate("/home/" + userId);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    }
-  }
+  
   function saveProject(code) {
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
@@ -272,6 +257,7 @@ const Room = () => {
       <div className="fixed z-[100]">
         <ToastContainer />
       </div>
+      <DeleteModal show={showDeleteModal} setShow={setShowDeleteModal} params={params} project={project} userId={userId}/>
       <div className="aside sticky top-0 left-0 z-50 sm:flex flex-col justify-between dark:bg-slate-950 w-full h-screen text-slate-950 dark:text-white p-2 border-r hidden ">
         <div>
           <div className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center">
@@ -343,7 +329,7 @@ const Room = () => {
             {userId === project?.userId && (
               <MdDelete
                 className="inline-flex text-3xl h-full w-auto  items-center justify-center p-1 border rounded-md cursor-pointer"
-                onClick={deleteProject}
+                onClick={()=>setShowDeleteModal(true)}
               />
             )}
             <div

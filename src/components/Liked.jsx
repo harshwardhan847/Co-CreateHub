@@ -53,7 +53,7 @@ const Liked = ({ setLoading }) => {
           {liked?.length > 0 ? (
             liked?.map((element) => {
               console.log(element);
-              return <ProjectsCard projectId={element} />;
+                return <ProjectsCard projectId={element} />;
             })
           ) : (
             <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
