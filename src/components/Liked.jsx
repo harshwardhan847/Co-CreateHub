@@ -52,12 +52,8 @@ const Liked = ({ setLoading }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           {liked?.length > 0 ? (
             liked?.map((element) => {
-                console.log(element);
-              return (
-                <ProjectsCard
-                  projectId={element?.projectId}
-                />
-              );
+              console.log(element);
+              return <ProjectsCard projectId={element} />;
             })
           ) : (
             <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
@@ -69,7 +65,7 @@ const Liked = ({ setLoading }) => {
         </div>
       ) : (
         <div className="flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
-            <Lottie animationData={loader} />
+          <Lottie animationData={loader} />
         </div>
       )}
       <Heading text="Try Now" />

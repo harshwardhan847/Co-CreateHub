@@ -8,7 +8,7 @@ import Community from "../components/Community";
 import Faq from "../components/Faq";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { databases } from "../appwrite/appwriteConfig";
 import LoadingBar from "react-top-loading-bar";
 import { RiAddFill } from "react-icons/ri";
@@ -16,12 +16,13 @@ import { AiOutlineHome } from "react-icons/ai";
 import { GoProject } from "react-icons/go";
 import { BiCommentDots } from "react-icons/bi";
 import { FaQuestion } from "react-icons/fa";
-import logo from "../assets/images/logo.png"
+import logo from "../assets/images/logo.png";
 import Liked from "../components/Liked";
 const Home = () => {
   const [loading, setLoading] = useState(0);
   const [tab, setTab] = useState("Home");
   const navigate = useNavigate();
+  const param = useParams();
   const [search, setSearch] = useState("");
   const [dropdown, setDropdown] = useState({
     notification: false,
@@ -37,7 +38,7 @@ const Home = () => {
     } else if (tab === "Projects") {
       return <MyProjects loading={loading} setLoading={setLoading} />;
     } else if (tab === "Liked") {
-      return  <Liked loading={loading} setLoading={setLoading}/>;
+      return <Liked loading={loading} setLoading={setLoading} />;
     } else if (tab === "FAQ") {
       return <Faq loading={loading} setLoading={setLoading} />;
     } else if (tab === "Help") {
@@ -77,7 +78,6 @@ const Home = () => {
     setTab("Community");
   }
   function handleProjectsClick() {
-    
     setTab("Projects");
   }
   function handleDocClick() {
@@ -90,7 +90,11 @@ const Home = () => {
     setTab("Help");
   }
   function createNewProject() {
-    navigate("/createProject");
+    navigate("/createProject", {
+      state: {
+        userId: param.userId,
+      },
+    });
   }
   // useEffect(()=>{
   //   databases.deleteDocument(process.env.REACT_APP_DB_ID,
@@ -146,11 +150,7 @@ const Home = () => {
                 href="https://flowbite.com"
                 className="flex items-center justify-between mr-4"
               >
-                <img
-                  src={logo}
-                  className="mr-3 h-10"
-                  alt="Flowbite Logo"
-                />
+                <img src={logo} className="mr-3 h-10" alt="Flowbite Logo" />
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Co-Create Hub
                 </span>

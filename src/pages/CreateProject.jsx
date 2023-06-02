@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { account, databases } from "../appwrite/appwriteConfig";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -9,6 +9,7 @@ const CreateProject = () => {
     roomName: "",
   });
   const navigate = useNavigate();
+  const location = useLocation();
 
   function createProjectHandler(e) {
     e.preventDefault();
@@ -21,9 +22,10 @@ const CreateProject = () => {
       {
         name: room.roomName,
         projectId: roomId,
-        userId: localStorage.getItem("userId"),
+        userId: location.state.userId,
       }
     );
+    console.log(location.state.userId);
     promise.then(function (response) {
       navigate(`/project/${roomId}`, {
         state: {
@@ -32,7 +34,6 @@ const CreateProject = () => {
       });
     });
   }
-  console.log(process.env.REACT_APP_DB_ID);
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-slate-400  flex-col">
       <h1 className="text-black text-3xl">Create Project</h1>
