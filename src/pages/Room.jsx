@@ -126,10 +126,15 @@ const Room = () => {
     }
   }, [project?.likes, userId]);
   async function removeFromYourLiked() {
-    const yourLiked = await getUserInfo();
+    const data = await getUserInfo();
+    const yourLiked = data?.yourLiked;
+    console.log(yourLiked);
     const removedLiked = yourLiked?.filter((c) => {
-      return c !== userId;
+      console.log(c);
+      console.log(params?.projectId);
+      return c !== params?.projectId;
     });
+    console.log(removedLiked);
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_USERS_COLLECTION_ID,
@@ -171,24 +176,16 @@ const Room = () => {
     );
   }
   async function getUserInfo() {
-    let yourLiked = [];
     const promise = databases.getDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_USERS_COLLECTION_ID,
       userId
     );
-    promise.then(
-      (res) => {
-        console.log(res.yourLiked);
-        yourLiked = res?.yourLiked;
-      },
-      (err) => console.log(err)
-    );
-    return yourLiked;
+    return promise;
   }
   async function addToYourLiked() {
-    console.log(getUserInfo());
-    const yourLiked = await getUserInfo();
+    const data = await getUserInfo();
+    const yourLiked = data?.yourLiked;
     console.log(yourLiked);
     yourLiked?.push(params?.projectId);
     console.log(yourLiked);
