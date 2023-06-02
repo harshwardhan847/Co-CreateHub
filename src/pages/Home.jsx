@@ -38,7 +38,13 @@ const Home = () => {
         <Community loading={loading} setLoading={setLoading} search={search} />
       );
     } else if (tab === "Projects") {
-      return <MyProjects loading={loading} setLoading={setLoading} />;
+      return (
+        <MyProjects
+          loading={loading}
+          setLoading={setLoading}
+          userId={param?.userId}
+        />
+      );
     } else if (tab === "Liked") {
       return <Liked loading={loading} setLoading={setLoading} />;
     } else if (tab === "FAQ") {
@@ -225,7 +231,6 @@ const Home = () => {
           </div>
         </nav>
 
-
         <aside
           className="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
           aria-label="Sidenav"
@@ -361,9 +366,9 @@ const Home = () => {
         <main className="p-4 md:ml-64 h-auto pt-20 overflow-x-hidden ">
           {renderCardsAccTab()}
         </main>
-        {/* <div className="md:ml-64 h-auto ">
+        <div className="md:ml-64 h-auto ">
           <Footer />
-        </div> */}
+        </div>
       </div>
     </div>
   );

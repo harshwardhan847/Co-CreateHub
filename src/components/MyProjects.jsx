@@ -7,12 +7,11 @@ import { databases } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
 import loader from "../assets/lottiefiles/loader.json";
 import Lottie from "lottie-react";
-const MyProjects = ({ setLoading }) => {
+const MyProjects = ({ setLoading,userId }) => {
   const [allProjects, setallProjects] = useState([]);
   const [topProjects, setTopProjects] = useState([]);
   const [processing, setProcessing] = useState(true);
   const [processing2, setProcessing2] = useState(true);
-  const userId = localStorage.getItem("userId");
   async function getAllProjects() {
     const promise = databases.listDocuments(
       process.env.REACT_APP_DB_ID,
