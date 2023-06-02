@@ -10,13 +10,16 @@ import { BsShareFill } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteModal from "../components/DeleteModal";
+import loader from "../assets/lottiefiles/loader.json";
+import Lottie from "lottie-react";
 const Room = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const [showDeleteModal,setShowDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [editor, setEditor] = useState(true);
   const [liked, setLiked] = useState(false);
   const [userId, setUserId] = useState();
+  const [processing, setProcessing] = useState(true);
   const [project, setProject] = useState({
     name: "",
     src: {
@@ -31,9 +34,9 @@ const Room = () => {
     noOfLikes: 0,
   });
   const [code, setCode] = useState({
-    html: "hello world\n\n\n\n",
-    css: "*{\n   margin:0;\n   padding:0;\n}\n",
-    js: `console.log("hello world");\n\n\n\n`,
+    html: "\n\n\n\n",
+    css: "\n",
+    js: `\n\n\n\n`,
     title: project?.name,
   });
   function getProject() {
@@ -55,15 +58,17 @@ const Room = () => {
           noOfLikes: response.noOfLikes,
           userId: response.userId,
         });
-        response?.src?setCode(JSON.parse(response?.src)):setCode(code)
+        response?.src ? setCode(JSON.parse(response?.src)) : setCode(code);
         console.log(JSON.parse(response?.src));
+        setProcessing(false);
       },
       (err) => {
         console.log(err);
+        setProcessing(false);
       }
     );
   }
-  
+
   function saveProject(code) {
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
@@ -257,7 +262,18 @@ const Room = () => {
       <div className="fixed z-[100]">
         <ToastContainer />
       </div>
-      <DeleteModal show={showDeleteModal} setShow={setShowDeleteModal} params={params} project={project} userId={userId}/>
+      <DeleteModal
+        show={showDeleteModal}
+        setShow={setShowDeleteModal}
+        params={params}
+        project={project}
+        userId={userId}
+      />
+      {processing && (
+        <div className="flex fixed items-center justify-center  w-full h-full bg-black bg-opacity-30 z-[200]">
+          <Lottie animationData={loader} />
+        </div>
+      )}
       <div className="aside sticky top-0 left-0 z-50 sm:flex flex-col justify-between dark:bg-slate-950 w-full h-screen text-slate-950 dark:text-white p-2 border-r hidden ">
         <div>
           <div className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center">
@@ -329,7 +345,7 @@ const Room = () => {
             {userId === project?.userId && (
               <MdDelete
                 className="inline-flex text-3xl h-full w-auto  items-center justify-center p-1 border rounded-md cursor-pointer"
-                onClick={()=>setShowDeleteModal(true)}
+                onClick={() => setShowDeleteModal(true)}
               />
             )}
             <div

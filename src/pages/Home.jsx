@@ -18,12 +18,14 @@ import { BiCommentDots } from "react-icons/bi";
 import { FaQuestion } from "react-icons/fa";
 import logo from "../assets/images/logo.png";
 import Liked from "../components/Liked";
+import CreateProjectModal from "../components/CreateProjectModal";
 const Home = () => {
   const [loading, setLoading] = useState(0);
   const [tab, setTab] = useState("Home");
   const navigate = useNavigate();
   const param = useParams();
   const [search, setSearch] = useState("");
+  const [showNewProjectModal, setShowNewProjectModal] = useState(false);
   const [dropdown, setDropdown] = useState({
     notification: false,
     profile: false,
@@ -107,6 +109,11 @@ const Home = () => {
         waitingTime={150}
         progress={loading}
         onLoaderFinished={() => setLoading(0)}
+      />
+      <CreateProjectModal
+        show={showNewProjectModal}
+        setShow={setShowNewProjectModal}
+        userId={param.userId}
       />
       <div className="antialiased bg-gray-50 dark:bg-gray-900 ">
         <nav className="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
@@ -344,7 +351,9 @@ const Home = () => {
                 <button
                   type="button"
                   className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center w-full mt-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  onClick={createNewProject}
+                  onClick={() => {
+                    setShowNewProjectModal(true);
+                  }}
                 >
                   <RiAddFill className="inline text-white font-extrabold text-2xl mr-2" />
                   New Project

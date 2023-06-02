@@ -19,7 +19,7 @@ const Result = ({ title, src, projectId }) => {
         srcDoc={src}
         title={title}
         sandbox="allow-scripts"
-        frameBorder="4"
+        frameBorder="no"
         className="w-screen md:w-full h-screen md:h-[cal(100vh-64px)] "
       ></iframe>
     </>
