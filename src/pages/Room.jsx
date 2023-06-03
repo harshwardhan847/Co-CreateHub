@@ -272,7 +272,7 @@ const Room = () => {
         userId={userId}
       />
       {processing && (
-        <div className="flex fixed items-center justify-center  w-full h-full bg-black bg-opacity-30 z-[200]">
+        <div className="flex fixed items-center justify-center  w-full h-full bg-black bg-opacity-30 z-[200] backdrop-blur-md">
           <Lottie animationData={loader} />
         </div>
       )}

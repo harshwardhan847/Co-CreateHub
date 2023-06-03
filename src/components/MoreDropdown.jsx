@@ -54,12 +54,12 @@ const MoreDropdown = ({ more, settings, setSettings }) => {
             <label className="relative inline-flex items-center w-full cursor-pointer">
               <input
                 type="checkbox"
-                checked={!settings?.hideInterface}
+                checked={settings?.hideInterface}
                 className="sr-only peer"
                 onChange={() => {
                   settings?.hideInterface
-                    ? setSettings({ ...settings, hideInterface: true })
-                    : setSettings({ ...settings, hideInterface: false });
+                    ? setSettings({ ...settings, hideInterface: false })
+                    : setSettings({ ...settings, hideInterface: true });
                 }}
               />
               <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-500 peer-checked:bg-blue-600"></div>
