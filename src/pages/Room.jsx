@@ -256,7 +256,10 @@ const Room = () => {
         setUserId(res?.$id);
         console.log(res);
       },
-      (err) => console.log(err)
+      (err) => {
+        console.log(err);
+        navigate("/");
+      }
     );
   }, []);
   return (

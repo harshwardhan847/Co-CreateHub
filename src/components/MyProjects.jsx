@@ -7,8 +7,8 @@ import { databases } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
 import loader from "../assets/lottiefiles/loader.json";
 import Lottie from "lottie-react";
-import download from "../assets/videos/download.mp4"
-const MyProjects = ({ setLoading,userId }) => {
+import download from "../assets/videos/download.mp4";
+const MyProjects = ({ setLoading, userId }) => {
   const [allProjects, setallProjects] = useState([]);
   const [topProjects, setTopProjects] = useState([]);
   const [processing, setProcessing] = useState(true);
@@ -117,7 +117,10 @@ const MyProjects = ({ setLoading,userId }) => {
             })
           ) : (
             <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
-              <h2 className="font-bold text-slate-950 dark:text-white text-7xl text-center">
+              <h2
+                className="font-bold text-slate-950 dark:text-white text-lg
+               sm:text-4xl md:text-7xl text-center"
+              >
                 No Projects Yet
               </h2>
             </div>

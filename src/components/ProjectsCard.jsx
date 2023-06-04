@@ -89,7 +89,7 @@ const ProjectsCard = ({ name, projectId }) => {
         </div>
 
         <div
-          className="text-white absolute z-30 flex items-end justify-start w-full h-full cursor-pointer  bg-gradient-to-t "
+          className="text-white absolute z-30 flex items-end justify-start w-full h-full cursor-pointer  bg-gradient-to-t hover:bg-black hover:bg-opacity-20 ease-in-out duration-150 "
           onClick={clickHandler}
         >
           <div className="flex justify-between items-center w-full bg-blue-600 p-2">
