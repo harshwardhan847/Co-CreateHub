@@ -7,6 +7,7 @@ import { databases } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
 import loader from "../assets/lottiefiles/loader.json";
 import Lottie from "lottie-react";
+import tailwind from "../assets/images/tailwind.png";
 const HomeSection = ({ setLoading }) => {
   const [recentlyBuild, setRecentlyBuild] = useState([]);
   const [topProjects, setTopProjects] = useState([]);
@@ -98,7 +99,7 @@ const HomeSection = ({ setLoading }) => {
         </div>
       )}
       <Heading text="What's New?" />
-      <FeatureCard />
+      <FeatureCard src={tailwind} />
       <Heading text="Recently Build" />
       {!processing ? (
         <div className="grid grid-cols-2 gap-4 mb-4">

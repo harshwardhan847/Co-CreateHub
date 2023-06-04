@@ -7,6 +7,7 @@ import { databases } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
 import loader from "../assets/lottiefiles/loader.json";
 import Lottie from "lottie-react";
+import download from "../assets/videos/download.mp4"
 const MyProjects = ({ setLoading,userId }) => {
   const [allProjects, setallProjects] = useState([]);
   const [topProjects, setTopProjects] = useState([]);
@@ -99,7 +100,7 @@ const MyProjects = ({ setLoading,userId }) => {
         </div>
       )}
       <Heading text="Try Now" />
-      <FeatureCard />
+      <FeatureCard video={download} />
       <Heading text="Your Projects" />
       {!processing ? (
         <div className="grid grid-cols-2 gap-4 mb-4">

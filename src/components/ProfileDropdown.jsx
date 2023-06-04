@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 
-const ProfileDropdown = ({ show }) => {
+const ProfileDropdown = ({ show, setShow }) => {
   const navigate = useNavigate();
   const params = useParams();
   console.log(params);
@@ -47,6 +47,7 @@ const ProfileDropdown = ({ show }) => {
         show ? "" : "hidden"
       } absolute top-0 right-0 translate-y-[10%] z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl`}
       id="dropdown"
+      onMouseLeave={() => setShow({ ...show, profile: false })}
     >
       <div className="py-3 px-4">
         <span className="block text-sm font-semibold text-gray-900 dark:text-white">

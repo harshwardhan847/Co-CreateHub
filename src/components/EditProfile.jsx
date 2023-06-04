@@ -13,8 +13,8 @@ const EditProfile = ({ show, setShow, id, getProfile }) => {
   useEffect(() => {
     const getUserProfile = async () => {
       const promise = databases.getDocument(
-        "REACT_APP_DB_ID",
-        "REACT_APP_USERS_COLLECTION_ID",
+        process.env.REACT_APP_DB_ID,
+        process.env.REACT_APP_USERS_COLLECTION_ID,
         id
       );
       promise.then(
@@ -40,15 +40,15 @@ const EditProfile = ({ show, setShow, id, getProfile }) => {
     e.preventDefault();
     if (existProfile) {
       databases.updateDocument(
-        "REACT_APP_DB_ID",
-        "REACT_APP_USERS_COLLECTION_ID",
+        process.env.REACT_APP_DB_ID,
+        process.env.REACT_APP_USERS_COLLECTION_ID,
         id,
         user
       );
     } else {
       const promise2 = databases.createDocument(
-        "REACT_APP_DB_ID",
-        "REACT_APP_USERS_COLLECTION_ID",
+        process.env.REACT_APP_DB_ID,
+        process.env.REACT_APP_USERS_COLLECTION_ID,
         id,
         user
       );

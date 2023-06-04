@@ -160,10 +160,14 @@ const Home = () => {
                 <span className="sr-only">Toggle sidebar</span>
               </button>
               <a
-                href="https://flowbite.com"
+                href="https://co-create-hub.netlify.app"
                 className="flex items-center justify-between mr-4"
               >
-                <img src={logo} className="mr-3 h-10" alt="Flowbite Logo" />
+                <img
+                  src={logo}
+                  className="mr-3 h-10"
+                  alt="Co-Create Hub Logo"
+                />
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Co-Create Hub
                 </span>
@@ -226,7 +230,7 @@ const Home = () => {
                   alt="user photo"
                 />
               </button>
-              <ProfileDropdown show={dropdown.profile} />
+              <ProfileDropdown show={dropdown.profile} setShow={setDropdown} />
             </div>
           </div>
         </nav>

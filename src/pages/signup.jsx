@@ -35,8 +35,8 @@ const Signup = () => {
       }
     );
     const promise2 = databases.createDocument(
-      "REACT_APP_DB_ID",
-      "REACT_APP_USERS_COLLECTION_ID",
+      process.env.REACT_APP_DB_ID,
+      process.env.REACT_APP_USERS_COLLECTION_ID,
       id,
       {
         address: "",

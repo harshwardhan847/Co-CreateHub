@@ -1,18 +1,19 @@
 import React from "react";
 
-import logo from "../assets/images/logo.png"
+import logo from "../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <footer className="p-4 bg-white sm:p-6 dark:bg-gray-800">
       <div className="mx-auto max-w-screen-xl">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a href="https://flowbite.com" className="flex items-center">
-              <img
-                src={logo}
-                className="mr-3 h-8"
-                alt="FlowBite Logo"
-              />
+            <a
+              href="https://co-create-hub.netlify.app"
+              className="flex items-center"
+            >
+              <img src={logo} className="mr-3 h-8" alt="FlowBite Logo" />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                 Co-Create Hub
               </span>
@@ -68,14 +69,20 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-600 dark:text-gray-400">
                 <li className="mb-4">
-                  <a href="#" className="hover:underline">
+                  <button
+                    onClick={() => navigate("/privacypolicy")}
+                    className="hover:underline"
+                  >
                     Privacy Policy
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#" className="hover:underline">
+                  <button
+                    onClick={() => navigate("/termsandconditions")}
+                    className="hover:underline"
+                  >
                     Terms &amp; Conditions
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>

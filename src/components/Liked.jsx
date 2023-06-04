@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import loader from "../assets/lottiefiles/loader.json";
 import Lottie from "lottie-react";
 
+import download from "../assets/videos/download.mp4";
 const Liked = ({ setLoading }) => {
   const [liked, setLiked] = useState();
   const [processing, setProcessing] = useState(true);
@@ -53,7 +54,7 @@ const Liked = ({ setLoading }) => {
           {liked?.length > 0 ? (
             liked?.map((element) => {
               console.log(element);
-                return <ProjectsCard projectId={element} />;
+              return <ProjectsCard projectId={element} />;
             })
           ) : (
             <div className="border-2 border-dashed flex items-center justify-center  rounded-lg border-gray-300 dark:border-gray-600 h-96 mb-4">
@@ -69,7 +70,7 @@ const Liked = ({ setLoading }) => {
         </div>
       )}
       <Heading text="Try Now" />
-      <FeatureCard />
+      <FeatureCard video={download} />
     </>
   );
 };
