@@ -262,6 +262,11 @@ const Room = () => {
       }
     );
   }, []);
+  useEffect(() => {
+    if (window.innerWidth < 640) {
+      navigate(`/result/${params.projectId}`, {});
+    }
+  });
   return (
     <div className="w-full h-full grid sm:grid-cols-[230px,1fr] relative scrollbar-hide ">
       <div className="fixed z-[100]">

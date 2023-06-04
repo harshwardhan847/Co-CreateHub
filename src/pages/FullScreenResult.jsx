@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { databases } from "../appwrite/appwriteConfig";
 import { useNavigate, useParams } from "react-router-dom";
-import logo from "../assets/images/logo.png"
+import loader from "../assets/lottiefiles/loader.json";
+import Lottie from "lottie-react";
+import logo from "../assets/images/logo.png";
 const FullScreenResult = () => {
   const params = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [processing, setProcessing] = useState(true);
   console.log(params);
   const [code, setCode] = useState({
     html: "",
@@ -60,30 +63,42 @@ const FullScreenResult = () => {
         });
         setCode(JSON.parse(response?.src));
         console.log(JSON.parse(response?.src));
+        setProcessing(false);
       },
       (err) => {
         console.log(err);
+        setProcessing(false);
       }
     );
   }
-  function clickHandler(){
-    navigate("/home")
+  function clickHandler() {
+    navigate("/");
   }
   useEffect(() => {
     getProject();
   }, []);
   return (
     <>
-    <img src={logo} alt="Co Create Hub" className=" fixed w-24 h-24 rounded-3xl bottom-5 right-5 z-50 cursor-pointer" onClick={clickHandler}/>
-    <iframe
-      srcDoc={src}
-      title={params?.projectId}
-      sandbox="allow-scripts"
-      frameborder="0"
-      className="w-full h-screen"
-      allow-same-origin
+      {processing && (
+        <div className="flex fixed items-center justify-center  w-full h-full bg-black bg-opacity-30 z-[200] backdrop-blur-md">
+          <Lottie animationData={loader} />
+        </div>
+      )}
+      <img
+        src={logo}
+        alt="Co Create Hub"
+        className=" fixed w-24 h-24 rounded-3xl bottom-5 right-5 z-50 cursor-pointer"
+        onClick={clickHandler}
+      />
+      <iframe
+        srcDoc={src}
+        title={params?.projectId}
+        sandbox="allow-scripts"
+        frameborder="0"
+        className="w-full h-screen"
+        allow-same-origin
       ></iframe>
-      </>
+    </>
   );
 };
 
