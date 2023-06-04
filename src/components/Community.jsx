@@ -6,6 +6,7 @@ import { databases } from "../appwrite/appwriteConfig";
 import { Query } from "appwrite";
 import loader from "../assets/lottiefiles/loader.json";
 import Lottie from "lottie-react";
+import tailwind from "../assets/images/tailwind.png";
 const Community = ({ search }) => {
   const [searchedProjects, setSearchedProjects] = useState([]);
   const [processing, setProcessing] = useState(true);
@@ -15,7 +16,7 @@ const Community = ({ search }) => {
     const promise = databases.listDocuments(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
-      [Query.search("name",search), Query.limit(20)]
+      [Query.search("name", search), Query.limit(20)]
     );
     promise.then(
       (response) => {
@@ -48,9 +49,8 @@ const Community = ({ search }) => {
                 <BigProjectCard
                   projectId={element?.projectId}
                   name={element?.name}
-                  likes={element?.likes}
+                  likes={element?.noOfLikes}
                   src={element?.src}
-                  key={element?.projectId}
                 />
               );
             })
@@ -70,7 +70,7 @@ const Community = ({ search }) => {
       <h2 className="text-5xl text-slate-950 dark:text-white mb-4">
         What's New?
       </h2>
-      <FeatureCard />
+      <FeatureCard src={tailwind} />
     </>
   );
 };

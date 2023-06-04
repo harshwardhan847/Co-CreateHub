@@ -22,6 +22,7 @@ import CreateProjectModal from "../components/CreateProjectModal";
 const Home = () => {
   const [loading, setLoading] = useState(0);
   const [tab, setTab] = useState("Home");
+  const [showSidebar, setShowSidebar] = useState(false);
   const navigate = useNavigate();
   const param = useParams();
   const [search, setSearch] = useState("");
@@ -97,17 +98,7 @@ const Home = () => {
   function handleHelpClick() {
     setTab("Help");
   }
-  function createNewProject() {
-    navigate("/createProject", {
-      state: {
-        userId: param.userId,
-      },
-    });
-  }
-  // useEffect(()=>{
-  //   databases.deleteDocument(process.env.REACT_APP_DB_ID,
-  //     process.env.REACT_APP_PROJECTS_COLLECTION_ID,"7818fdd8-0fee-4603-9c2c-f64994f581d6")
-  // })
+
   return (
     <div className="overflow-hidden">
       <LoadingBar
@@ -126,6 +117,9 @@ const Home = () => {
           <div className="flex flex-wrap justify-between items-center">
             <div className="flex justify-start items-center">
               <button
+                onClick={() => {
+                  showSidebar ? setShowSidebar(false) : setShowSidebar(true);
+                }}
                 data-drawer-target="drawer-navigation"
                 data-drawer-toggle="drawer-navigation"
                 aria-controls="drawer-navigation"
@@ -176,6 +170,9 @@ const Home = () => {
             <div className="flex items-center lg:order-2">
               <button
                 type="button"
+                onClick={() => {
+                  showSidebar ? setShowSidebar(false) : setShowSidebar(true);
+                }}
                 data-drawer-toggle="drawer-navigation"
                 aria-controls="drawer-navigation"
                 className="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
@@ -236,7 +233,9 @@ const Home = () => {
         </nav>
 
         <aside
-          className="fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform -translate-x-full bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
+          className={`fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform ${
+            showSidebar ? "translate-x-0" : "-translate-x-full"
+          } bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
           aria-label="Sidenav"
           id="drawer-navigation"
         >

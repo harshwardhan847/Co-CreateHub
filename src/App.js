@@ -7,7 +7,6 @@ import Room from "./pages/Room.jsx";
 import Canvas from "./pages/Canvas.jsx";
 import FirstScreen from "./pages/FirstScreen.jsx";
 import Home from "./pages/Home.jsx";
-import CreateProject from "./pages/CreateProject.jsx";
 import FullScreenResult from "./pages/FullScreenResult.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import TermsAndConditions from "./pages/TermsAndConditions.jsx";
@@ -21,7 +20,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/home/:userId" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/createProject" element={<CreateProject />} />
           <Route path="/project/:projectId" element={<Room />} />
           <Route path="/canvas/:projectId" element={<Canvas />} />
           <Route path="/result/:projectId" element={<FullScreenResult />} />

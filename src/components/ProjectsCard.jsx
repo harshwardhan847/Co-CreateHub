@@ -83,7 +83,7 @@ const ProjectsCard = ({ name, projectId }) => {
   }
   return (
     project.name && (
-      <div className="border-2 relative border-dashed border-gray-300 rounded-lg dark:border-gray-600 h-32 md:h-64 ">
+      <div className="border-2 relative border-dashed border-gray-300 rounded-lg dark:border-gray-600  aspect-video sm:aspect-auto md:h-64 ">
         <div className="w-full absolute h-full opacity-10 from-black to-white z-20 flex items-center justify-center">
           {processing && <Lottie animationData={loader} />}
         </div>
