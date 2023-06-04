@@ -1,11 +1,16 @@
 import React from "react";
 import { TbExternalLink } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
-const Result = ({ title, src, projectId }) => {
+const Result = ({ title, src, projectId, tailwind }) => {
   const navigate = useNavigate();
   function clickHandler() {
-    navigate(`/result/${projectId}`, {});
+    navigate(`/result/${projectId}`, {
+      state: {
+        tailwind,
+      },
+    });
   }
+  console.log(tailwind);
   return (
     <>
       <button

@@ -14,6 +14,8 @@ import Result from "./Result";
 const Editor = ({ code, setCode, projectUser, currentUser }) => {
   const [language, setLanguage] = useState(html());
   const extensions = [language];
+  const [tailwind, setTailwind] = useState("");
+  const [show, setShow] = useState(false);
 
   const [tabs, setTabs] = useState({
     htmlEditor: true,
@@ -80,7 +82,7 @@ const Editor = ({ code, setCode, projectUser, currentUser }) => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${code?.title}</title>
-        <script src="https://cdn.tailwindcss.com"></script>
+        ${tailwind}
         </head>
         <body>
         ${code?.html}
@@ -196,12 +198,49 @@ const Editor = ({ code, setCode, projectUser, currentUser }) => {
           >
             Save & Run
           </button>
-          <RiSettingsFill className="text-white text-2xl" />
+          <div>
+            <RiSettingsFill
+              className="text-white text-2xl"
+              onClick={() => setShow(show ? false : true)}
+            />
+            <div
+              className={`${
+                show ? "" : "hidden"
+              } absolute top-8 p-4 border  right-0 translate-y-[10%] z-50 my-4 w-56 text-base list-none bg-white divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded`}
+              id="dropdown"
+              onMouseLeave={() => setShow(false)}
+            >
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input
+                  type="checkbox"
+                  value=""
+                  class="sr-only peer"
+                  onClick={() => {
+                    tailwind ===
+                    '<script src="https://cdn.tailwindcss.com"></script>'
+                      ? setTailwind("")
+                      : setTailwind(
+                          '<script src="https://cdn.tailwindcss.com"></script>'
+                        );
+                  }}
+                />
+                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  Tailwind Css
+                </span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex">
         <div className="hidden sm:block" ref={editor} />
-        <Result title={code?.title} src={src} projectId={params?.projectId} />
+        <Result
+          title={code?.title}
+          src={src}
+          projectId={params?.projectId}
+          tailwind={tailwind}
+        />
       </div>
     </div>
   );

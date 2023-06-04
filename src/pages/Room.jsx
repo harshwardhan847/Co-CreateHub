@@ -286,7 +286,10 @@ const Room = () => {
       )}
       <div className="aside sticky top-0 left-0 z-50 sm:flex flex-col justify-between dark:bg-slate-950 w-full h-screen text-slate-950 dark:text-white p-2 border-r hidden ">
         <div>
-          <div className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center">
+          <div
+            className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center"
+            onClick={() => navigate("/")}
+          >
             <img
               src={logo}
               alt="Co Cerate Hub"

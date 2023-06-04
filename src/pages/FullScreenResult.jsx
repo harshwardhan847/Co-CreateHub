@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { databases } from "../appwrite/appwriteConfig";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import loader from "../assets/lottiefiles/loader.json";
 import Lottie from "lottie-react";
 import logo from "../assets/images/logo.png";
 const FullScreenResult = () => {
   const params = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(true);
   console.log(params);
@@ -22,8 +23,8 @@ const FullScreenResult = () => {
     <meta charset="UTF-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>${code?.title}</title>
-          <script src="https://cdn.tailwindcss.com"></script>
+          <title>${code?.title}</title>    
+        ${location?.state?.tailwind}
           </head>
           <body>
           ${code?.html}
