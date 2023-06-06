@@ -17,7 +17,7 @@ const MyProjects = ({ setLoading, userId }) => {
     const promise = databases.listDocuments(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
-      [Query.orderAsc("$createdAt"), Query.equal("userId", userId)]
+      [Query.orderDesc("$createdAt"), Query.equal("userId", userId)]
     );
     promise.then(
       (response) => {
@@ -100,7 +100,7 @@ const MyProjects = ({ setLoading, userId }) => {
         </div>
       )}
       <Heading text="Try Now" />
-      <FeatureCard video={download} />
+      <FeatureCard video={download} text={"Hide Interface"} />
       <Heading text="Your Projects" />
       {!processing ? (
         <div className="grid grid-cols-2 gap-4 mb-4">

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import ProjectsCard from "../components/ProjectsCard";
+import React, {  useState } from "react";
 import HomeSection from "../components/HomeSection";
-import NotificationDropdown from "../components/NotificationDropdown";
 import ProfileDropdown from "../components/ProfileDropdown";
 import MyProjects from "../components/MyProjects";
 import Community from "../components/Community";
 import Faq from "../components/Faq";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
-import { useNavigate, useParams } from "react-router-dom";
-import { databases } from "../appwrite/appwriteConfig";
+import { useParams } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import { RiAddFill } from "react-icons/ri";
 import { AiOutlineHome } from "react-icons/ai";
@@ -19,11 +16,11 @@ import { FaQuestion } from "react-icons/fa";
 import logo from "../assets/images/logo.png";
 import Liked from "../components/Liked";
 import CreateProjectModal from "../components/CreateProjectModal";
+import avtar from "../assets/images/avtar.jpg"
 const Home = () => {
   const [loading, setLoading] = useState(0);
   const [tab, setTab] = useState("Home");
   const [showSidebar, setShowSidebar] = useState(false);
-  const navigate = useNavigate();
   const param = useParams();
   const [search, setSearch] = useState("");
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);
@@ -54,19 +51,7 @@ const Home = () => {
       return <Contact loading={loading} setLoading={setLoading} />;
     }
   }
-  function showNotification() {
-    if (dropdown.notification === true) {
-      setDropdown({
-        notification: false,
-        profile: false,
-      });
-    } else {
-      setDropdown({
-        notification: true,
-        profile: false,
-      });
-    }
-  }
+  
   function showprofileDropdown() {
     if (dropdown.profile === true) {
       setDropdown({
@@ -112,8 +97,8 @@ const Home = () => {
         setShow={setShowNewProjectModal}
         userId={param.userId}
       />
-      <div className="antialiased bg-gray-50 dark:bg-gray-900 ">
-        <nav className="bg-white border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
+      <div className="antialiased bg-white dark:bg-gray-900 ">
+        <nav className="bg-slate-100 border-b border-gray-200 px-4 py-2.5 dark:bg-gray-800 dark:border-gray-700 fixed left-0 right-0 top-0 z-50">
           <div className="flex flex-wrap justify-between items-center">
             <div className="flex justify-start items-center">
               <button
@@ -223,7 +208,7 @@ const Home = () => {
                 <span className="sr-only">Open user menu</span>
                 <img
                   className="w-8 h-8 rounded-full"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gough.png"
+                  src={avtar}
                   alt="user photo"
                 />
               </button>
@@ -235,11 +220,11 @@ const Home = () => {
         <aside
           className={`fixed top-0 left-0 z-40 w-64 h-screen pt-14 transition-transform ${
             showSidebar ? "translate-x-0" : "-translate-x-full"
-          } bg-white border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
+          } bg-slate-100 border-r border-gray-200 md:translate-x-0 dark:bg-gray-800 dark:border-gray-700`}
           aria-label="Sidenav"
           id="drawer-navigation"
         >
-          <div className="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
+          <div className="overflow-y-auto py-5 px-3 h-full bg-slate-100 dark:bg-gray-800">
             <label for="sidebar-search" className="sr-only">
               Search
             </label>

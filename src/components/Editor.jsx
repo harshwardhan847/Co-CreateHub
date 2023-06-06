@@ -147,7 +147,7 @@ const Editor = ({ code, setCode, projectUser, currentUser }) => {
   }
   return (
     <div className=" w-full relative">
-      <div className="border-b sticky z-50 h-16 top-0 left-0 sm:flex justify-between items-center border-gray-200 dark:border-gray-700 bg-slate-950 w-full hidden">
+      <div className="border-b sticky z-50 h-16 top-0 left-0 sm:flex justify-between items-center border-gray-200 dark:border-gray-700 bg-slate-100 dark:bg-slate-950 w-full hidden">
         <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
           <li className="mr-2">
             <button
@@ -200,7 +200,7 @@ const Editor = ({ code, setCode, projectUser, currentUser }) => {
           </button>
           <div>
             <RiSettingsFill
-              className="text-white text-2xl"
+              className="text-slate-950 mr-4 dark:text-white text-2xl"
               onClick={() => setShow(show ? false : true)}
             />
             <div

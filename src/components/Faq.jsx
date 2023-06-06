@@ -23,13 +23,11 @@ const Faq = () => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                What do you mean by "Figma assets"?
+                Can we create multiple projects?
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                You will have access to download the full Figma project
-                including all of the pages, the components, responsive pages,
-                and also the icons, illustrations, and images included in the
-                screens.
+                Yes, you can create as many projects as you like as we don't
+                have any premium plans for which you have to be charged.
               </p>
             </div>
             <div className="mb-10">
@@ -46,12 +44,12 @@ const Faq = () => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                What does "lifetime access" exactly mean?
+                How can I sign up for CoCreate Hub?
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Once you have purchased either the design, code, or both
-                packages, you will have access to all of the future updates
-                based on the roadmap, free of charge.
+                Signing up for CoCreate Hub is easy! Simply click on the "Sign
+                Up" button on our homepage and follow the prompts to create your
+                account.
               </p>
             </div>
             <div className="mb-10">
@@ -68,24 +66,13 @@ const Faq = () => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                How does support work?
+                What can I do on CoCreate Hub?
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                We're aware of the importance of well qualified support, that is
-                why we decided that support will only be provided by the authors
-                that actually worked on this project.
-              </p>
-              <p className="text-gray-500 dark:text-gray-400">
-                Feel free to{" "}
-                <a
-                  href="#"
-                  className="font-medium underline text-primary-600 dark:text-primary-500 hover:no-underline"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  contact us
-                </a>{" "}
-                and we'll help you out as soon as we can.
+                CoCreate Hub is a comprehensive platform where you can build
+                HTML, CSS, and JavaScript websites, plan processes and to-do
+                lists on our whiteboard, and even practice your coding skills.
+                It's a place to learn, collaborate, and create.
               </p>
             </div>
             <div className="mb-10">
@@ -102,24 +89,13 @@ const Faq = () => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                I want to build more than one project. Is that allowed?
+                Is CoCreate Hub suitable for beginners?
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                You can use Windster for an unlimited amount of projects,
-                whether it's a personal website, a SaaS app, or a website for a
-                client. As long as you don't build a product that will directly
-                compete with Windster either as a UI kit, theme, or template,
-                it's fine.
-              </p>
-              <p className="text-gray-500 dark:text-gray-400">
-                Find out more information by{" "}
-                <a
-                  href="#"
-                  className="font-medium underline text-primary-600 dark:text-primary-500 hover:no-underline"
-                >
-                  reading the license
-                </a>
-                .
+                Absolutely! CoCreate Hub is designed to cater to all skill
+                levels. Whether you're a beginner or an experienced coder, our
+                platform provides resources, tutorials, and a supportive
+                community to help you grow and improve your coding skills.
               </p>
             </div>
           </div>
@@ -138,18 +114,13 @@ const Faq = () => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                What does "free updates" include?
+                Can I teach coding on CoCreate Hub?
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                The free updates that will be provided is based on the{" "}
-                <a
-                  href="#"
-                  className="font-medium underline text-primary-600 dark:text-primary-500 hover:no-underline"
-                >
-                  roadmap
-                </a>{" "}
-                that we have laid out for this project. It is also possible that
-                we will provide extra updates outside of the roadmap as well.
+                Yes, you can! CoCreate Hub encourages knowledge sharing and
+                collaboration. You can share your coding expertise, mentor
+                others, and contribute to the learning community. Together, we
+                can foster an environment of growth and mutual support.
               </p>
             </div>
             <div className="mb-10">
@@ -166,23 +137,13 @@ const Faq = () => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                What does the free version include?
+                What is the whiteboard feature in CoCreate Hub?
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                The{" "}
-                <a
-                  href="#"
-                  className="font-medium underline text-primary-600 dark:text-primary-500 hover:no-underline"
-                >
-                  free version
-                </a>{" "}
-                of Windster includes a minimal style guidelines, component
-                variants, and a dashboard page with the mobile version alongside
-                it.
-              </p>
-              <p className="text-gray-500 dark:text-gray-400">
-                You can use this version for any purposes, because it is
-                open-source under the MIT license.
+                The whiteboard feature in CoCreate Hub allows you to plan and
+                organize your processes, brainstorm ideas, and visualize your
+                projects. It's a versatile tool that helps you collaborate, make
+                notes, and track progress, all within the platform.
               </p>
             </div>
             <div className="mb-10">
@@ -199,18 +160,13 @@ const Faq = () => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                What is the difference between Windster and Tailwind UI?
+                How does the integration with Tailwind CSS work?
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Although both Windster and Tailwind UI are built for integration
-                with Tailwind CSS, the main difference is in the design, the
-                pages, the extra components and UI elements that Windster
-                includes.
-              </p>
-              <p className="text-gray-500 dark:text-gray-400">
-                Additionally, Windster is a project that is still in
-                development, and later it will include both the application,
-                marketing, and e-commerce UI interfaces.
+                CoCreate Hub has integrated Tailwind CSS, a powerful CSS
+                framework. With this integration, you can leverage the features
+                of Tailwind CSS to enhance your designs, streamline your
+                workflow, and create visually stunning websites.
               </p>
             </div>
             <div className="mb-10">
@@ -227,28 +183,15 @@ const Faq = () => {
                     clip-rule="evenodd"
                   ></path>
                 </svg>
-                Can I use Windster in open-source projects?
+                What support options are available on CoCreate Hub?
               </h3>
               <p className="text-gray-500 dark:text-gray-400">
-                Generally, it is accepted to use Windster in open-source
-                projects, as long as it is not a UI library, a theme, a
-                template, a page-builder that would be considered as an
-                alternative to Windster itself.
+                CoCreate Hub offers comprehensive support to its users. You can
+                reach out to our support team through our Help page, access
+                our knowledge base for frequently asked questions, or seek
+                assistance from the community forums.
               </p>
-              <p className="text-gray-500 dark:text-gray-400">
-                With that being said, feel free to use this design kit for your
-                open-source projects.
-              </p>
-              <p className="text-gray-500 dark:text-gray-400">
-                Find out more information by{" "}
-                <a
-                  href="#"
-                  className="font-medium underline text-primary-600 dark:text-primary-500 hover:no-underline"
-                >
-                  reading the license
-                </a>
-                .
-              </p>
+              
             </div>
           </div>
         </div>

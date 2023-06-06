@@ -284,7 +284,7 @@ const Room = () => {
           <Lottie animationData={loader} />
         </div>
       )}
-      <div className="aside sticky top-0 left-0 z-50 sm:flex flex-col justify-between dark:bg-slate-950 w-full h-screen text-slate-950 dark:text-white p-2 border-r hidden ">
+      <aside className="aside bg-slate-100 sticky top-0 left-0 z-50 sm:flex flex-col justify-between dark:bg-slate-950 w-full h-screen text-slate-950 dark:text-white p-2 border-r hidden ">
         <div>
           <div
             className="w-full h-16 flex items-center mb-4 gap-2 mt-2 border-b pb-2 justify-center"
@@ -353,11 +353,11 @@ const Room = () => {
               </button>
             </li>
           </ul>
-          <div className="flex items-center mt-4 mb-4 gap-1">
+          <div className="flex items-center mt-4 text-white mb-4 gap-1">
             {console.log(userId + project?.userId)}
             {userId === project?.userId && (
               <MdDelete
-                className="inline-flex text-3xl h-full w-auto  items-center justify-center p-1 border rounded-md cursor-pointer"
+                className="inline-flex text-3xl h-full w-auto text-slate-950 dark:text-white  items-center justify-center p-1 border rounded-md cursor-pointer"
                 onClick={() => setShowDeleteModal(true)}
               />
             )}
@@ -370,7 +370,7 @@ const Room = () => {
             </div>
           </div>
         </div>
-      </div>
+      </aside>
       <main className=" md:h-[cal(100vh-64px)]">
         {editor ? (
           <Editor

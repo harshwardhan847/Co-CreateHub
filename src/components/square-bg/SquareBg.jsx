@@ -1,5 +1,5 @@
 import React from "react";
-import "./SquareBg.css"
+import "./SquareBg.css";
 const SquareBg = () => {
   return (
     <div className="area bg-transparent absolute h-full w-full">

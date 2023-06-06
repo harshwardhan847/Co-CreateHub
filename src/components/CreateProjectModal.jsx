@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";
 
-const CreateProjectModal = ({ show, setShow,userId }) => {
+const CreateProjectModal = ({ show, setShow, userId }) => {
   const [room, setRoom] = useState({
     roomName: "",
   });
@@ -68,7 +68,7 @@ const CreateProjectModal = ({ show, setShow,userId }) => {
             <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">
               Create new Project
             </h3>
-            <form class="space-y-6" action="#">
+            <div class="space-y-6">
               <div>
                 <label
                   for="text"
@@ -90,25 +90,25 @@ const CreateProjectModal = ({ show, setShow,userId }) => {
                 />
               </div>
 
-              <div class="flex justify-between">
+              {/* <div class="flex justify-between">
                 <div class="flex items-start">
-                  <div class="flex items-center h-5">
+                <div class="flex items-center h-5">
                     <input
-                      id="remember"
+                    id="remember"
                       type="checkbox"
                       value=""
                       class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                       required
-                    />
+                      />
                   </div>
                   <label
-                    for="remember"
-                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                  for="remember"
+                  class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
                     Private
-                  </label>
-                </div>
-              </div>
+                    </label>
+                    </div>
+                  </div> */}
               <button
                 type="button"
                 onClick={createProjectHandler}
@@ -116,7 +116,7 @@ const CreateProjectModal = ({ show, setShow,userId }) => {
               >
                 Create
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>

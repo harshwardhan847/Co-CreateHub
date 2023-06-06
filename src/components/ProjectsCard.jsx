@@ -27,13 +27,13 @@ const ProjectsCard = ({ name, projectId }) => {
           <body>
           ${code?.html}
           </body>
-          <style>${code?.css}</style>
+          <style>html{zoom:.9}${code?.css}</style>
           <script>${code?.js}</script>
           </html>
           `;
 
   const [project, setProject] = useState({
-    name: "",
+    name: true,
     src: {
       html: "hello world\n\n\n\n",
       css: "*{\n   margin:0;\n   padding:0;\n}\n",
@@ -71,6 +71,10 @@ const ProjectsCard = ({ name, projectId }) => {
       (err) => {
         console.log(err);
         setProcessing(false);
+        setProject({
+          
+          name: false,
+        });
       }
     );
   }
@@ -108,8 +112,10 @@ const ProjectsCard = ({ name, projectId }) => {
             scrolling="no"
             frameborder="0"
             title={name}
+            width="100%"
+            height="100%"
             sandbox="allow-scripts"
-            className="w-full h-full bg-white overflow-hidden"
+            className=" bg-white overflow-hidden flex items-center justify-center"
           ></iframe>
         </div>
       </div>

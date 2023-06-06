@@ -70,7 +70,7 @@ const Liked = ({ setLoading }) => {
         </div>
       )}
       <Heading text="Try Now" />
-      <FeatureCard video={download} />
+      <FeatureCard video={download} text={"Download Board"} />
     </>
   );
 };

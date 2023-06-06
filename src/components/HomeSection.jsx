@@ -34,7 +34,7 @@ const HomeSection = ({ setLoading }) => {
     const promise = databases.listDocuments(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
-      [Query.orderAsc("$createdAt"), Query.limit(10)]
+      [Query.orderDesc("$createdAt"), Query.limit(10)]
     );
     promise.then(
       (response) => {
@@ -78,9 +78,6 @@ const HomeSection = ({ setLoading }) => {
               return (
                 <ProjectsCard
                   projectId={element?.projectId}
-                  name={element?.name}
-                  likes={element?.noOfLikes}
-                  src={element?.src}
                   key={element?.projectId}
                 />
               );
@@ -108,9 +105,6 @@ const HomeSection = ({ setLoading }) => {
               return (
                 <BigProjectCard
                   projectId={element?.projectId}
-                  name={element?.name}
-                  likes={element?.noOfLikes}
-                  src={element?.src}
                   key={element?.projectId}
                 />
               );
@@ -129,7 +123,10 @@ const HomeSection = ({ setLoading }) => {
         </div>
       )}
       <Heading text="Comming Soon!" />
-      <FeatureCard />
+      <FeatureCard
+        src="https://planhub.com/wp-content/uploads/2022/09/PrivatePlanroom-1.png"
+        text="Make Projects Private"
+      />
     </div>
   );
 };
