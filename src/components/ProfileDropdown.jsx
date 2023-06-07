@@ -3,6 +3,8 @@ import { account } from "../appwrite/appwriteConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
+import {CgProfile} from "react-icons/cg"
+import {FiLogOut} from "react-icons/fi"
 
 const ProfileDropdown = ({ show, setShow }) => {
   const navigate = useNavigate();
@@ -73,6 +75,7 @@ const ProfileDropdown = ({ show, setShow }) => {
             }}
             className="block py-2 w-full px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
           >
+            <CgProfile className="inline mr-1"/>
             My profile
           </button>
         </li>
@@ -86,6 +89,7 @@ const ProfileDropdown = ({ show, setShow }) => {
             onClick={handleLogout}
             className="block py-2 px-4 w-full text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
+            <FiLogOut className="inline mr-1"/>
             Sign out
           </button>
         </li>
