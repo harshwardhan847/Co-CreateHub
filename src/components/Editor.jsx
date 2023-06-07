@@ -11,10 +11,9 @@ import { RiSettingsFill } from "react-icons/ri";
 import { SiJavascript } from "react-icons/si";
 import Result from "./Result";
 
-const Editor = ({ code, setCode, projectUser, currentUser }) => {
+const Editor = ({ code, setCode, projectUser, currentUser,tailwind,setTailwind }) => {
   const [language, setLanguage] = useState(html());
   const extensions = [language];
-  const [tailwind, setTailwind] = useState("");
   const [show, setShow] = useState(false);
 
   const [tabs, setTabs] = useState({
@@ -153,7 +152,7 @@ const Editor = ({ code, setCode, projectUser, currentUser }) => {
             <button
               className={`inline-flex items-center gap-1 p-4   rounded-t-lg  group ${
                 tabs.htmlEditor
-                  ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
+                  ? "text-green-600 border-b-2 border-green-600 dark:text-blue-500 dark:border-blue-500"
                   : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 border-b-2 border-transparent"
               }`}
               onClick={htmlEditorBtnHandler}
@@ -166,7 +165,7 @@ const Editor = ({ code, setCode, projectUser, currentUser }) => {
             <button
               className={`inline-flex items-center gap-1 p-4  rounded-t-lg ${
                 tabs.cssEditor
-                  ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
+                  ? "text-green-600 border-b-2 border-green-600 dark:text-blue-500 dark:border-blue-500"
                   : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 border-b-2 border-transparent"
               }  group`}
               aria-current="page"
@@ -180,7 +179,7 @@ const Editor = ({ code, setCode, projectUser, currentUser }) => {
             <button
               className={`inline-flex items-center gap-1 p-4 rounded-t-lg ${
                 tabs.jsEditor
-                  ? "text-blue-600 border-b-2 border-blue-600 dark:text-blue-500 dark:border-blue-500"
+                  ? "text-green-600 border-b-2 border-green-600 dark:text-blue-500 dark:border-blue-500"
                   : "hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 border-b-2 border-transparent"
               } group`}
               onClick={jsEditorBtnHandler}
@@ -194,7 +193,7 @@ const Editor = ({ code, setCode, projectUser, currentUser }) => {
           <button
             onClick={handleSaveAndRun}
             type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            className="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             Save & Run
           </button>

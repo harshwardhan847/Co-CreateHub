@@ -15,6 +15,7 @@ import Lottie from "lottie-react";
 const Room = () => {
   const params = useParams();
   const navigate = useNavigate();
+  const [tailwind, setTailwind] = useState(`<script src="https://cdn.tailwindcss.com"></script>`);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [editor, setEditor] = useState(true);
   const [liked, setLiked] = useState(false);
@@ -255,18 +256,19 @@ const Room = () => {
       (res) => {
         setUserId(res?.$id);
         console.log(res);
+        if (window.innerWidth < 640) {
+          navigate(`/result/${params?.projectId}`, {state:{
+            "userId": res?.$id
+          }});
+        }
       },
       (err) => {
         console.log(err);
         navigate("/");
       }
     );
-  }, []);
-  useEffect(() => {
-    if (window.innerWidth < 640) {
-      navigate(`/result/${params.projectId}`, {});
-    }
-  });
+  }, [navigate,params]);
+  
   return (
     <div className="w-full h-full grid sm:grid-cols-[230px,1fr] relative scrollbar-hide ">
       <div className="fixed z-[100]">
@@ -321,7 +323,7 @@ const Room = () => {
               <button
                 className={`inline-block w-full px-4 py-2   rounded-l-lg  focus:outline-none  ${
                   editor
-                    ? "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
+                    ? "dark:bg-gray-700 dark:text-white bg-green-300 text-gray-900 "
                     : ""
                 }`}
                 aria-current="page"
@@ -346,7 +348,7 @@ const Room = () => {
                 className={`inline-block w-full px-4 py-2   rounded-r-lg  focus:outline-none ${
                   editor
                     ? ""
-                    : "dark:bg-gray-700 dark:text-white text-gray-900 bg-gray-100"
+                    : "dark:bg-gray-700 bg-green-300 dark:text-white text-gray-900 "
                 }`}
               >
                 Board
@@ -357,12 +359,12 @@ const Room = () => {
             {console.log(userId + project?.userId)}
             {userId === project?.userId && (
               <MdDelete
-                className="inline-flex text-3xl h-full w-auto text-slate-950 dark:text-white  items-center justify-center p-1 border rounded-md cursor-pointer"
+                className="inline-flex text-3xl border-green-600 dark:border-blue-600 h-full w-auto text-slate-950 dark:text-white  items-center justify-center p-1 border rounded-md cursor-pointer"
                 onClick={() => setShowDeleteModal(true)}
               />
             )}
             <div
-              className=" p-2 bg-blue-700 rounded-lg text-center w-full cursor-pointer"
+              className=" p-2 bg-green-600 dark:bg-blue-600 rounded-lg text-center w-full cursor-pointer"
               onClick={shareClickHandler}
             >
               <BsShareFill className="inline-flex mr-2 text-lg" />
@@ -379,6 +381,8 @@ const Room = () => {
             setCode={setCode}
             currentUser={userId}
             projectUser={project?.userId}
+            tailwind={tailwind}
+            setTailwind={setTailwind}
           />
         ) : (
           <Canvas

@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import loader from "../assets/lottiefiles/loader.json";
 import Lottie from "lottie-react";
 import logo from "../assets/images/logo.png";
+import {MdArrowBackIosNew} from "react-icons/md"
 const FullScreenResult = () => {
   const params = useParams();
   const location = useLocation();
@@ -24,7 +25,7 @@ const FullScreenResult = () => {
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <title>${code?.title}</title>    
-        ${location?.state?.tailwind}
+        ${location?.state?.tailwind || ""}
           </head>
           <body>
           ${code?.html}
@@ -77,6 +78,7 @@ const FullScreenResult = () => {
   }
   useEffect(() => {
     getProject();
+    console.log(location?.state?.userId);
   }, []);
   return (
     <>
@@ -88,9 +90,17 @@ const FullScreenResult = () => {
       <img
         src={logo}
         alt="Co Create Hub"
-        className=" fixed w-24 h-24 rounded-3xl bottom-5 right-5 z-50 cursor-pointer"
+        className=" fixed w-12 sm:w-24 h-12 sm:h-24 rounded-md sm:rounded-3xl bottom-5 right-5 z-50 cursor-pointer"
         onClick={clickHandler}
       />
+      <div
+        className="fixed sm:hidden cursor-pointer rounded-full w-10 h-10 bg-white flex items-center justify-center text-2xl font-bold text-white z-50 bg-opacity-20 top-5 left-5"
+        onClick={() => {
+          navigate("/home/" + location?.state?.userId);
+        }}
+      >
+        <MdArrowBackIosNew />
+      </div>
       <iframe
         srcDoc={src}
         title={params?.projectId}

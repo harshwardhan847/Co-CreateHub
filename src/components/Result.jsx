@@ -15,7 +15,7 @@ const Result = ({ title, src, projectId, tailwind }) => {
     <>
       <button
         onClick={clickHandler}
-        className=" fixed bottom-0 right-0 m-5 cursor-pointer bg-blue-500 p-2 px-4 rounded-md text-white flex items-center justify-center"
+        className=" fixed bottom-0 right-0 m-5 cursor-pointer bg-green-600 dark:bg-blue-600 p-2 px-4 rounded-md text-white flex items-center justify-center"
       >
         Full Screen
         <TbExternalLink className="inline ml-2 text-xl" />

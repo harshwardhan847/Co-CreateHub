@@ -77,8 +77,10 @@ const HomeSection = ({ setLoading }) => {
               console.log(element);
               return (
                 <ProjectsCard
-                  projectId={element?.projectId}
-                  key={element?.projectId}
+                projectId={element?.projectId}
+                name={element?.name}
+                likes={element?.noOfLikes}
+                src={element?.src}
                 />
               );
             })
@@ -104,8 +106,10 @@ const HomeSection = ({ setLoading }) => {
             recentlyBuild?.map((element) => {
               return (
                 <BigProjectCard
-                  projectId={element?.projectId}
-                  key={element?.projectId}
+                projectId={element?.projectId}
+                name={element?.name}
+                likes={element?.noOfLikes}
+                src={element?.src}
                 />
               );
             })

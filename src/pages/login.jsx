@@ -32,12 +32,12 @@ const Login = () => {
     );
   };
   return (
-    <section className="h-screen bg-white dark:bg-slate-950 relative flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center md:mx-0 md:my-0">
+    <section className="h-screen relative backdrop-blur-lg dark:bg-slate-900 flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center md:mx-0 md:my-0">
       <Blob />
       <div className=" w-full md:w-1/3 ">
         <Lottie animationData={welcome} />
       </div>
-      <div className="md:w-1/3 max-w-sm z-20">
+      <div className="w-[80%] md:w-1/3 max-w-sm z-20">
         <div className="text-3xl dark:text-white text-black font-medium font-sans mb-4">
           Welcome Back!!!
         </div>

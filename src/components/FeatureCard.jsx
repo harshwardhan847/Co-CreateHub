@@ -21,7 +21,7 @@ const FeatureCard = ({ src, video, text }) => {
       {text && (
         <h2
           data-shadow={text}
-          className="dang absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-30 text-xl sm:text-7xl w-full h-full flex items-center justify-center text-slate-950 backdrop-blur-sm font-extrabold p-4 rounded-md  ease-in-out duration-150"
+          className="dang absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-30 text-2xl sm:text-4xl md::text-7xl w-full h-full flex items-center justify-center text-slate-950 backdrop-blur-sm font-extrabold p-4 rounded-md  ease-in-out duration-150"
         >
           {text}
         </h2>

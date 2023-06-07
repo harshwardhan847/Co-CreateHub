@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import HomeSection from "../components/HomeSection";
 import ProfileDropdown from "../components/ProfileDropdown";
 import MyProjects from "../components/MyProjects";
@@ -16,7 +16,8 @@ import { FaQuestion } from "react-icons/fa";
 import logo from "../assets/images/logo.png";
 import Liked from "../components/Liked";
 import CreateProjectModal from "../components/CreateProjectModal";
-import avtar from "../assets/images/avtar.jpg"
+import avtar from "../assets/images/avtar.jpg";
+import Toggle from "../components/darkModeToggler/Toggle";
 const Home = () => {
   const [loading, setLoading] = useState(0);
   const [tab, setTab] = useState("Home");
@@ -51,7 +52,7 @@ const Home = () => {
       return <Contact loading={loading} setLoading={setLoading} />;
     }
   }
-  
+
   function showprofileDropdown() {
     if (dropdown.profile === true) {
       setDropdown({
@@ -67,21 +68,27 @@ const Home = () => {
   }
   function handleHomeClick() {
     setTab("Home");
+    setShowSidebar(false);
   }
   function handleCommunityClick() {
     setTab("Community");
+    setShowSidebar(false);
   }
   function handleProjectsClick() {
     setTab("Projects");
+    setShowSidebar(false);
   }
   function handleDocClick() {
     setTab("Liked");
+    setShowSidebar(false);
   }
   function handleFaqClick() {
     setTab("FAQ");
+    setShowSidebar(false);
   }
   function handleHelpClick() {
     setTab("Help");
+    setShowSidebar(false);
   }
 
   return (
@@ -144,10 +151,10 @@ const Home = () => {
               >
                 <img
                   src={logo}
-                  className="mr-3 h-10"
+                  className="mr-3 h-8 sm:h-10"
                   alt="Co-Create Hub Logo"
                 />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                <span className="self-center text-base sm:text-2xl font-semibold whitespace-nowrap dark:text-white">
                   Co-Create Hub
                 </span>
               </a>
@@ -160,7 +167,7 @@ const Home = () => {
                 }}
                 data-drawer-toggle="drawer-navigation"
                 aria-controls="drawer-navigation"
-                className="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                className="p-2 mr-1 hidden sm:static text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
               >
                 <span className="sr-only">Toggle search</span>
                 <svg
@@ -196,7 +203,9 @@ const Home = () => {
                 </svg>
               </button>
               <NotificationDropdown show={dropdown.notification} /> */}
-
+              <div className="hidden sm:flex">
+                <Toggle />
+              </div>
               <button
                 type="button"
                 onClick={showprofileDropdown}
@@ -207,9 +216,9 @@ const Home = () => {
               >
                 <span className="sr-only">Open user menu</span>
                 <img
-                  className="w-8 h-8 rounded-full"
+                  className="w-6 sm:w-8 h-6 sm:h-8 rounded-full"
                   src={avtar}
-                  alt="user photo"
+                  alt="user"
                 />
               </button>
               <ProfileDropdown show={dropdown.profile} setShow={setDropdown} />
@@ -254,6 +263,12 @@ const Home = () => {
                   setSearch(e.target.value);
                   setTab("Community");
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    setShowSidebar(false);
+                    console.log("Enter");
+                  }
+                }}
               />
             </div>
             <ul className="space-y-2">
@@ -262,7 +277,7 @@ const Home = () => {
                   onClick={handleHomeClick}
                   className={`flex items-center p-2 text-base font-medium w-full ${
                     tab === "Home"
-                      ? "bg-blue-600 text-white"
+                      ? "bg-green-500 dark:bg-blue-600 text-white"
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg  group mt-4`}
                 >
@@ -275,7 +290,7 @@ const Home = () => {
                   onClick={handleCommunityClick}
                   className={`flex items-center p-2 text-base font-medium w-full ${
                     tab === "Community"
-                      ? "bg-blue-600 text-white"
+                      ? "bg-green-500 dark:bg-blue-600 text-white"
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg  group`}
                 >
@@ -288,7 +303,7 @@ const Home = () => {
                   onClick={handleProjectsClick}
                   className={`flex items-center p-2 text-base font-medium w-full ${
                     tab === "Projects"
-                      ? "bg-blue-600 text-white"
+                      ? "bg-green-500 dark:bg-blue-600 text-white"
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   }  rounded-lg group`}
                 >
@@ -303,7 +318,7 @@ const Home = () => {
                   onClick={handleDocClick}
                   className={`flex items-center p-2 text-base font-medium w-full ${
                     tab === "Liked"
-                      ? "bg-blue-600 text-white"
+                      ? "bg-green-500 dark:bg-blue-600 text-white"
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg  group`}
                 >
@@ -316,7 +331,7 @@ const Home = () => {
                   onClick={handleFaqClick}
                   className={`flex items-center p-2 text-base font-medium w-full ${
                     tab === "FAQ"
-                      ? "bg-blue-600 text-white"
+                      ? "bg-green-500 dark:bg-blue-600 text-white"
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg group`}
                 >
@@ -329,7 +344,7 @@ const Home = () => {
                   onClick={handleHelpClick}
                   className={`flex items-center p-2 text-base font-medium w-full ${
                     tab === "Help"
-                      ? "bg-blue-600 text-white"
+                      ? "bg-green-500 dark:bg-blue-600 text-white"
                       : " text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 "
                   } rounded-lg group`}
                 >
@@ -338,7 +353,7 @@ const Home = () => {
                 </button>
                 <button
                   type="button"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center w-full mt-4 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className="text-white hidden bg-green-500 dark:bg-blue-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center sm:inline-flex items-center w-full mt-4 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   onClick={() => {
                     setShowNewProjectModal(true);
                   }}
@@ -348,6 +363,9 @@ const Home = () => {
                 </button>
               </li>
             </ul>
+            <div className="sm:hidden mt-4 flex justify-end items-end">
+              <Toggle />
+            </div>
           </div>
         </aside>
 
