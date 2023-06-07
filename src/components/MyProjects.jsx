@@ -69,7 +69,7 @@ const MyProjects = ({ setLoading, userId }) => {
   }, []);
   return (
     <>
-      <h2 className="text-5xl text-slate-950 dark:text-white mb-4">
+      <h2 className="text-3xl sm:text-5xl text-slate-950 dark:text-white mb-4">
         Your Top Projects
       </h2>
       {!processing2 ? (

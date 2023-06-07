@@ -92,9 +92,9 @@ const BigProjectCard = ({ name, projectId, likes }) => {
           className="text-white absolute z-30 flex items-end justify-start w-full h-full cursor-pointer  bg-gradient-to-t "
           onClick={clickHandler}
         >
-          <div className="flex justify-between items-center w-full bg-green-600 dark:bg-blue-600 p-2">
-            <div className=" text-lg font-medium font-sans ">{name}</div>
-            <div className=" text-lg font-medium font-sans flex items-center">
+          <div className="flex text-sm sm:text-lg justify-between items-center w-full bg-green-600 dark:bg-blue-600 p-2">
+            <div className=" font-medium font-sans ">{name}</div>
+            <div className=" font-medium font-sans flex items-center">
               <BiLike className="inline text-xl h-full mr-1" />
               {likes}
             </div>

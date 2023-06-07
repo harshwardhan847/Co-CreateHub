@@ -94,11 +94,11 @@ const ProjectsCard = ({ name, projectId }) => {
           className="text-white absolute z-30 flex items-end justify-start w-full h-full cursor-pointer  bg-gradient-to-t hover:bg-black hover:bg-opacity-20 ease-in-out duration-150 "
           onClick={clickHandler}
         >
-          <div className="flex justify-between items-center w-full bg-green-600 dark:bg-blue-600 p-2">
-            <div className=" text-lg font-medium font-sans ">
+          <div className="flex text-sm sm:text-lg  justify-between items-center w-full bg-green-600 dark:bg-blue-600 p-2">
+            <div className=" font-medium font-sans ">
               {project?.name}
             </div>
-            <div className=" text-lg font-medium font-sans flex items-center">
+            <div className="font-medium font-sans flex items-center">
               <BiLike className="inline text-xl h-full mr-1" />
               {project?.noOfLikes}
             </div>
