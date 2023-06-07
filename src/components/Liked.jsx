@@ -34,7 +34,6 @@ const Liked = ({ setLoading }) => {
   }
 
   useEffect(() => {
-    console.log("runned");
     getLiked().then(
       () => {
         setLoading(100);
@@ -53,7 +52,6 @@ const Liked = ({ setLoading }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           {liked?.length > 0 ? (
             liked?.map((element) => {
-              console.log(element);
               return <ProjectsCard projectId={element} />;
             })
           ) : (

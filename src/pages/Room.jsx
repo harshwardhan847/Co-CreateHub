@@ -41,7 +41,6 @@ const Room = () => {
     title: project?.name,
   });
   function getProject() {
-    console.log("get runned");
     const promise = databases.getDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
@@ -60,7 +59,6 @@ const Room = () => {
           userId: response.userId,
         });
         response?.src ? setCode(JSON.parse(response?.src)) : setCode(code);
-        console.log(JSON.parse(response?.src));
         setProcessing(false);
       },
       (err) => {
@@ -71,7 +69,6 @@ const Room = () => {
   }
 
   function saveProject(code) {
-    console.log(userId + " and " + project?.userId);
     if (userId !== project?.userId) return;
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
@@ -121,13 +118,9 @@ const Room = () => {
   async function removeFromYourLiked() {
     const data = await getUserInfo();
     const yourLiked = data?.yourLiked;
-    console.log(yourLiked);
     const removedLiked = yourLiked?.filter((c) => {
-      console.log(c);
-      console.log(params?.projectId);
       return c !== params?.projectId;
     });
-    console.log(removedLiked);
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_USERS_COLLECTION_ID,
@@ -179,9 +172,7 @@ const Room = () => {
   async function addToYourLiked() {
     const data = await getUserInfo();
     const yourLiked = data?.yourLiked;
-    console.log(yourLiked);
     yourLiked?.push(params?.projectId);
-    console.log(yourLiked);
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_USERS_COLLECTION_ID,
@@ -198,7 +189,6 @@ const Room = () => {
   async function addIdInLiked(likesArr) {
     await addToYourLiked();
     likesArr.push(userId);
-    console.log(likesArr);
     const promise = databases.updateDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
@@ -233,7 +223,6 @@ const Room = () => {
   function shareClickHandler() {
     navigator.clipboard.writeText(window.location.href).then(
       (response) => {
-        console.log("Copied link to clipboard");
         toast("Copied link to clipboard", {
           position: "top-right",
           autoClose: 5000,
@@ -356,7 +345,6 @@ const Room = () => {
             </li>
           </ul>
           <div className="flex items-center mt-4 text-white mb-4 gap-1">
-            {console.log(userId + project?.userId)}
             {userId === project?.userId && (
               <MdDelete
                 className="inline-flex text-3xl border-green-600 dark:border-blue-600 h-full w-auto text-slate-950 dark:text-white  items-center justify-center p-1 border rounded-md cursor-pointer"

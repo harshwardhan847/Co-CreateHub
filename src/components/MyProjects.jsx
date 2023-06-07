@@ -58,7 +58,6 @@ const MyProjects = ({ setLoading, userId }) => {
     await getYourTopProjects();
   }
   useEffect(() => {
-    console.log("runned");
     getProjects().then(
       () => {
         setLoading(100);

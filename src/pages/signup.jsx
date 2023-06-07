@@ -17,9 +17,7 @@ const Signup = () => {
   //signup
   const signupUser = async (e) => {
     e.preventDefault();
-    console.log(user);
     const promise = account.create(id, user.email, user.password, user.name);
-    console.log(promise);
     promise.then(
       function (response) {
         console.log(response);

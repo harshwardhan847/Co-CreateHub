@@ -266,7 +266,6 @@ const Home = () => {
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     setShowSidebar(false);
-                    console.log("Enter");
                   }
                 }}
               />

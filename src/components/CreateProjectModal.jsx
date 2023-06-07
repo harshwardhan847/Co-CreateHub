@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { account, databases } from "../appwrite/appwriteConfig";
+import React, { useState } from "react";
+import { databases } from "../appwrite/appwriteConfig";
 import { useNavigate } from "react-router-dom";
 
 import { v4 as uuidv4 } from "uuid";

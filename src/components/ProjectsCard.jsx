@@ -46,7 +46,6 @@ const ProjectsCard = ({ name, projectId }) => {
     noOfLikes: 0,
   });
   async function getProject(projectId) {
-    console.log(projectId);
     const promise = databases.getDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
@@ -82,7 +81,6 @@ const ProjectsCard = ({ name, projectId }) => {
     getProject(projectId);
   }, [projectId]);
   function clickHandler() {
-    console.log("clicked");
     navigate("/project/" + projectId);
   }
   return (

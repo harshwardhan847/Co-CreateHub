@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { account, client } from "../appwrite/appwriteConfig";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { account } from "../appwrite/appwriteConfig";
+import { useNavigate, useLocation } from "react-router-dom";
 import { databases } from "../appwrite/appwriteConfig";
 import EditProfile from "../components/EditProfile";
 import LoadingBar from "react-top-loading-bar";
@@ -12,12 +12,10 @@ const Profile = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [loading, setLoading] = useState(0);
   const [profile, setProfile] = useState();
-  console.log(location);
   useEffect(() => {
     getProfileDetails(location?.state?.userId);
   }, [location?.state?.userId, showEdit]);
 
-  console.log(location);
   async function getProfileDetails(id) {
     const promise = databases.getDocument(
       process.env.REACT_APP_DB_ID,

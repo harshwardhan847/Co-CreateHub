@@ -29,7 +29,6 @@ const Editor = ({
     jsEditor: false,
   });
   function getCurrentEditorCode() {
-    console.log(code);
     if (tabs?.cssEditor) {
       return code?.css;
     } else if (tabs?.jsEditor) {
@@ -45,14 +44,13 @@ const Editor = ({
   const { setContainer } = useCodeMirror({
     container: editor.current,
     extensions,
-    theme: "dark",
+    theme: localStorage.theme,
     height: `${window.innerHeight - 64}px`,
     width: `${window.innerWidth / 2 - 230}px`,
     value: getCurrentEditorCode(),
 
     onChange: (value, viewUpdate) => {
       if (tabs.cssEditor) {
-        console.log(code);
         setCode({
           html: code.html,
           js: code.js,

@@ -45,7 +45,6 @@ const BigProjectCard = ({ name, projectId, likes }) => {
     canvas: "",
   });
   function getProject() {
-    console.log("get runned");
     const promise = databases.getDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
@@ -62,7 +61,6 @@ const BigProjectCard = ({ name, projectId, likes }) => {
           like: response.like,
         });
         setCode(JSON.parse(response?.src));
-        console.log(JSON.parse(response?.src));
 
         setLoading(false);
       },
@@ -80,7 +78,6 @@ const BigProjectCard = ({ name, projectId, likes }) => {
     getProject();
   }, []);
   function clickHandler() {
-    console.log("clicked");
     navigate("/project/" + projectId);
   }
   return (

@@ -10,7 +10,6 @@ const Result = ({ title, src, projectId, tailwind }) => {
       },
     });
   }
-  console.log(tailwind);
   return (
     <>
       <button

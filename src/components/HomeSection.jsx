@@ -55,7 +55,6 @@ const HomeSection = ({ setLoading }) => {
   }
 
   useEffect(() => {
-    console.log("runned");
     getProjects().then(
       () => {
         setLoading(100);
@@ -74,13 +73,12 @@ const HomeSection = ({ setLoading }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           {topProjects?.length > 0 ? (
             topProjects?.map((element) => {
-              console.log(element);
               return (
                 <ProjectsCard
-                projectId={element?.projectId}
-                name={element?.name}
-                likes={element?.noOfLikes}
-                src={element?.src}
+                  projectId={element?.projectId}
+                  name={element?.name}
+                  likes={element?.noOfLikes}
+                  src={element?.src}
                 />
               );
             })
@@ -106,10 +104,10 @@ const HomeSection = ({ setLoading }) => {
             recentlyBuild?.map((element) => {
               return (
                 <BigProjectCard
-                projectId={element?.projectId}
-                name={element?.name}
-                likes={element?.noOfLikes}
-                src={element?.src}
+                  projectId={element?.projectId}
+                  name={element?.name}
+                  likes={element?.noOfLikes}
+                  src={element?.src}
                 />
               );
             })
@@ -126,7 +124,7 @@ const HomeSection = ({ setLoading }) => {
           <Lottie animationData={loader} />
         </div>
       )}
-      <Heading text="Comming Soon!" />
+      <Heading text="Coming Soon!" />
       <FeatureCard
         src="https://planhub.com/wp-content/uploads/2022/09/PrivatePlanroom-1.png"
         text="Make Projects Private"

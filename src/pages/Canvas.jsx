@@ -7,13 +7,10 @@ import {
 } from "react-icons/ai";
 import { TfiPencil, TfiEraser } from "react-icons/tfi";
 import { MdUndo } from "react-icons/md";
-// import { useSearchParams } from "react-router-dom";
 import CanvasDraw from "react-canvas-draw";
 import PencilDropdown from "../components/PencilDropdown";
 import MoreDropdown from "../components/MoreDropdown";
-// import { client, account, databases } from "../appwrite/appwriteConfig";
 const Canvas = ({ settings, setSettings, canvasData, setProject, project }) => {
-  console.log(canvasData);
   const canvasDraw = useRef();
   const [more, setMore] = useState(false);
   const [pencil, setpencil] = useState(false);
@@ -22,9 +19,7 @@ const Canvas = ({ settings, setSettings, canvasData, setProject, project }) => {
     useState(false);
   
   useEffect(() => {
-    console.log(canvasData);
     if(canvasData){
-      console.log(canvasData);
       canvasDraw?.current?.loadSaveData(canvasData, true);
     }
   }, []);

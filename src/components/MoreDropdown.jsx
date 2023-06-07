@@ -2,7 +2,6 @@ import React from "react";
 
 const MoreDropdown = ({ more, settings, setSettings }) => {
   function gridHandler() {
-    console.log(settings?.showGrids);
     if (settings?.showGrids) {
       setSettings({
         ...settings,

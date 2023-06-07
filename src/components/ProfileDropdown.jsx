@@ -1,5 +1,5 @@
 import React from "react";
-import { account, databases } from "../appwrite/appwriteConfig";
+import { account } from "../appwrite/appwriteConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -7,7 +7,6 @@ import { useState } from "react";
 const ProfileDropdown = ({ show, setShow }) => {
   const navigate = useNavigate();
   const params = useParams();
-  console.log(params);
   const [profile, setProfile] = useState({
     name: "",
     email: "",

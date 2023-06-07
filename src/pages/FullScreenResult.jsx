@@ -10,7 +10,6 @@ const FullScreenResult = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [processing, setProcessing] = useState(true);
-  console.log(params);
   const [code, setCode] = useState({
     html: "",
     css: "",
@@ -35,19 +34,7 @@ const FullScreenResult = () => {
           </html>
           `;
 
-  const [project, setProject] = useState({
-    name: "",
-    src: {
-      html: "hello world\n\n\n\n",
-      css: "*{\n   margin:0;\n   padding:0;\n}\n",
-      js: `console.log("hello world");\n\n\n\n`,
-    },
-    private: false,
-    like: 0,
-    canvas: "",
-  });
   function getProject() {
-    console.log("get runned");
     const promise = databases.getDocument(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
@@ -56,15 +43,7 @@ const FullScreenResult = () => {
     promise.then(
       (response) => {
         console.log(response);
-        setProject({
-          canvas: response.canvas,
-          name: response.name,
-          src: JSON.parse(response.src),
-          private: response.private,
-          like: response.like,
-        });
         setCode(JSON.parse(response?.src));
-        console.log(JSON.parse(response?.src));
         setProcessing(false);
       },
       (err) => {
@@ -78,7 +57,6 @@ const FullScreenResult = () => {
   }
   useEffect(() => {
     getProject();
-    console.log(location?.state?.userId);
   }, []);
   return (
     <>

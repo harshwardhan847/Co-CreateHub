@@ -33,6 +33,8 @@ const PencilDropdown = ({
         case b:
           h = (r - g) / d + 4;
           break;
+        default:
+          break;
       }
 
       h = Math.round(h * 60 + 180) % 360;
@@ -59,13 +61,11 @@ const PencilDropdown = ({
   }
 
   function complementryHexColor(hex) {
-    console.log(hex);
     if (hex[0] !== "#") {
       hex
         .substring(4, hex.length - 1)
         .replace(/ /g, "")
         .split(",");
-      console.log(hex);
       let r = hex[0],
         g = hex[1],
         b = hex[2];

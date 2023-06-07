@@ -12,7 +12,6 @@ const Community = ({ search }) => {
   const [processing, setProcessing] = useState(true);
 
   async function getTopProjects(search) {
-    console.log(search);
     const promise = databases.listDocuments(
       process.env.REACT_APP_DB_ID,
       process.env.REACT_APP_PROJECTS_COLLECTION_ID,
