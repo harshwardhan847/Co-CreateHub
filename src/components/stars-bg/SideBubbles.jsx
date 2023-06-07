@@ -1,29 +1,29 @@
 import React from "react";
-import "./SideBubble.css"
+import "./SideBubble.css";
 const SideBubbles = () => {
   return (
     <div className="absolute w-full h-full">
-      <div class="cont border-t-[15px] border-b-[15px] dark:border-[#00000D] border-t-[#66d178] border-b-slate-300 ">
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
-        <div class="drip bg-[#66d178] dark:bg-white"></div>
+      <div className="cont border-t-[15px] border-b-[15px] dark:border-[#00000D] border-t-[#66d178] border-b-slate-300 ">
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
+        <div className="drip bg-[#66d178] dark:bg-white"></div>
 
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
           <defs>

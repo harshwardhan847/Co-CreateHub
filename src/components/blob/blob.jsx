@@ -1,9 +1,7 @@
-import React from 'react'
-import "./blob.css"
+import React from "react";
+import "./blob.css";
 const Blob = () => {
-  return (
-    <div class="blob"></div>
-  )
-}
+  return <div className="blob"></div>;
+};
 
-export default Blob
+export default Blob;

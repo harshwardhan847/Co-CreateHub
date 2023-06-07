@@ -17,22 +17,22 @@ const Toggle = () => {
       <label className="text-[3px]">
         <input
           onChange={toggleDarkMode}
-          class="toggle-checkbox"
+          className="toggle-checkbox"
           type="checkbox"
           defaultChecked
         ></input>
-        <div class="toggle-slot">
-          <div class="sun-icon-wrapper">
+        <div className="toggle-slot">
+          <div className="sun-icon-wrapper">
             <div
-              class="iconify sun-icon"
+              className="iconify sun-icon"
               data-icon="feather-sun"
               data-inline="false"
             ></div>
           </div>
-          <div class="toggle-button"></div>
-          <div class="moon-icon-wrapper">
+          <div className="toggle-button"></div>
+          <div className="moon-icon-wrapper">
             <div
-              class="iconify moon-icon"
+              className="iconify moon-icon"
               data-icon="feather-moon"
               data-inline="false"
             ></div>
