@@ -41,6 +41,7 @@ const Contact = () => {
           <div>
             <label
               for="email"
+              name="reply_to"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
               Your email
@@ -57,6 +58,7 @@ const Contact = () => {
           <div>
             <label
               for="subject"
+              name="subject"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
               Subject
@@ -73,6 +75,7 @@ const Contact = () => {
           <div className="sm:col-span-2">
             <label
               for="message"
+              name="message"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
             >
               Your message
