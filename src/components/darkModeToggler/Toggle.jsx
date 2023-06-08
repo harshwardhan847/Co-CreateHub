@@ -14,7 +14,7 @@ const Toggle = () => {
   };
   return (
     <>
-      <label className="text-[3px]">
+      <label className="text-[3px] cursor-pointer">
         <input
           onChange={toggleDarkMode}
           className="toggle-checkbox"

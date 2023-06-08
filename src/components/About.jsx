@@ -3,7 +3,7 @@ import SquareBg from "./square-bg/SquareBg";
 
 const About = () => {
   return (
-    <section className="text-black h-full dark:text-white  body-font bg-white dark:bg-slate-950 w-full flex items-center flex-col relative ">
+    <section className="text-black h-full px-8 dark:text-white  body-font bg-white dark:bg-slate-950 w-full flex items-center flex-col relative ">
       <SquareBg />
       <h2 className="text-center text-5xl text-slate-950 dark:text-white font-medium py-12 z-10 relative">
         About Us

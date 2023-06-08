@@ -7,8 +7,8 @@ const PrivacyPolicy = () => {
     <>
       <div className=" bg-white dark:bg-slate-900 dark:text-white relative text-slate-950 flex items-center w-full justify-center flex-col">
         <Bubbles />
-        <div className="container px-4 mb-8 z-20">
-          <h1 className="text-4xl font-bold text-center my-8">
+        <div className="container px-10 mb-8 z-20 text-justify">
+          <h1 className="text-xl sm:text-4xl font-bold text-center my-8">
             Privacy Policy for Co-Create Hub
           </h1>
 

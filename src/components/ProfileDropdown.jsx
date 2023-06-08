@@ -73,7 +73,7 @@ const ProfileDropdown = ({ show, setShow }) => {
                 },
               });
             }}
-            className="block py-2 w-full px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
+            className="flex items-center justify-center py-2 w-full px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
           >
             <CgProfile className="inline mr-1"/>
             My profile
@@ -87,7 +87,7 @@ const ProfileDropdown = ({ show, setShow }) => {
         <li>
           <button
             onClick={handleLogout}
-            className="block py-2 px-4 w-full text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="flex items-center justify-center py-2 px-4 w-full text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <FiLogOut className="inline mr-1"/>
             Sign out

@@ -20,7 +20,7 @@ const Hero = () => {
         className="absolute bg-cover w-full h-full  bg-blend-hard-light contrast-50 opacity-25"
       />
       <SideBubbles />
-      <div className="container mx-auto flex px-5 sm:py-24 md:flex-row flex-col items-center z-30 ">
+      <div className="container mx-auto flex px-5 md:flex-row flex-col items-center z-30 ">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center ">
           <h1 className="title-font sm:text-7xl text-3xl mb-4 font-medium text-slate-950 dark:text-white">
             Design. Code. Create.

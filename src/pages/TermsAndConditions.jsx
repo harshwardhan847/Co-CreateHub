@@ -7,8 +7,8 @@ const TermsAndConditions = () => {
     <>
       <div className=" bg-white relative dark:bg-slate-900 dark:text-white text-slate-950 flex items-center w-full justify-center flex-col">
         <Bubbles />
-        <div className="container px-4 mb-8 z-20">
-          <h2 className="text-4xl font-bold text-center my-8">
+        <div className="container px-10 text-justify mb-8 z-20">
+          <h2 className="text-xl sm:text-4xl font-bold text-center my-8">
             Terms and Conditions
           </h2>
           <p>
