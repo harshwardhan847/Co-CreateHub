@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./toggle.css";
 import useDarkSide from "../../hooks/useDarkSide";
 import { useState } from "react";
 const Toggle = () => {
-  const [colorTheme, setTheme] = useDarkSide();
-  const [darkSide, setDarkSide] = useState(
-    colorTheme === "light" ? true : false
-  );
+  // const [colorTheme, setTheme] = useDarkSide();
+  // const [darkSide, setDarkSide] = useState(
+  //   colorTheme === "light" ? true : false
+  // );
+  // const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(localStorage.getItem("theme")||"dark");
+  const [isChecked, setIsChecked] = useState(true);
+  useEffect(() => {
+    // toggle.current?.checked==="light"?toggle.current?.checked=false:toggle.current?.checked=true
+    const root = window.document.documentElement;
+    if (theme === "light") {
+      setIsChecked(true);
+      root.classList.remove("dark");
+      root.classList.add("light");
+      localStorage.setItem("theme", theme);
+    } else {
+      setIsChecked(false)
+      root.classList.remove("light");
+      root.classList.add("dark");
+      localStorage.setItem("theme", theme);
+    }
+  }, [theme]);
+  const toggleDarkMode = () => {
+    // setTheme(colorTheme);
+    // setDarkSide(checked);
 
-  const toggleDarkMode = (checked) => {
-    setTheme(colorTheme);
-    setDarkSide(checked);
+    if (isChecked) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
   };
   return (
     <>
@@ -19,7 +42,7 @@ const Toggle = () => {
           onChange={toggleDarkMode}
           className="toggle-checkbox"
           type="checkbox"
-          defaultChecked
+          checked={!isChecked}
         ></input>
         <div className="toggle-slot">
           <div className="sun-icon-wrapper">
